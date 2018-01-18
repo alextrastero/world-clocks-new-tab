@@ -2176,7 +2176,7 @@ exports.hydrate = hydrate;
 exports.createFactory = createFactory;
 exports.default = index;
 //# sourceMappingURL=index.esm.js.map
-},{}],15:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 "use strict";
 
 /**
@@ -2213,7 +2213,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],14:[function(require,module,exports) {
+},{}],17:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2330,7 +2330,7 @@ if ("development" !== 'production') {
 }
 
 module.exports = warning;
-},{"./emptyFunction":15}],17:[function(require,module,exports) {
+},{"./emptyFunction":16}],15:[function(require,module,exports) {
 /*
 object-assign
 (c) Sindre Sorhus
@@ -2422,7 +2422,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],13:[function(require,module,exports) {
+},{}],14:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2436,7 +2436,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],16:[function(require,module,exports) {
+},{}],13:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -2496,7 +2496,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 module.exports = checkPropTypes;
-},{"fbjs/lib/invariant":14,"fbjs/lib/warning":18,"./lib/ReactPropTypesSecret":13}],11:[function(require,module,exports) {
+},{"fbjs/lib/invariant":17,"fbjs/lib/warning":18,"./lib/ReactPropTypesSecret":14}],11:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3013,7 +3013,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
   return ReactPropTypes;
 };
-},{"fbjs/lib/emptyFunction":15,"fbjs/lib/invariant":14,"fbjs/lib/warning":18,"object-assign":17,"./lib/ReactPropTypesSecret":13,"./checkPropTypes":16}],12:[function(require,module,exports) {
+},{"fbjs/lib/emptyFunction":16,"fbjs/lib/invariant":17,"fbjs/lib/warning":18,"object-assign":15,"./lib/ReactPropTypesSecret":14,"./checkPropTypes":13}],12:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3073,7 +3073,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"fbjs/lib/emptyFunction":15,"fbjs/lib/invariant":14,"./lib/ReactPropTypesSecret":13}],10:[function(require,module,exports) {
+},{"fbjs/lib/emptyFunction":16,"fbjs/lib/invariant":17,"./lib/ReactPropTypesSecret":14}],10:[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -3132,6 +3132,7 @@ var Clock = function Clock(_ref) {
       _nervjs2.default.createElement(
         "object",
         { data: _clock2.default, type: "image/svg+xml", width: "200", height: "200" },
+        _nervjs2.default.createElement("param", { name: "gmt", value: zone.GMT }),
         _nervjs2.default.createElement("param", { name: "dial", value: "austria" }),
         _nervjs2.default.createElement("param", { name: "hourHand", value: "swiss" }),
         _nervjs2.default.createElement("param", { name: "minuteHand", value: "swiss" }),
@@ -3153,13 +3154,16 @@ var Clock = function Clock(_ref) {
     zone && _nervjs2.default.createElement(
       "p",
       { className: "clock__svg-wrapper" },
-      zone
+      zone.title
     )
   );
 };
 
 Clock.propTypes = {
-  zone: _propTypes2.default.string
+  zone: _propTypes2.default.shape({
+    GMT: _propTypes2.default.string,
+    title: _propTypes2.default.string
+  })
 };
 
 exports.default = Clock;
@@ -3275,7 +3279,7 @@ var App = function (_React$Component) {
         "div",
         { className: "container" },
         this.zones.map(function (zone) {
-          return _nervjs2.default.createElement(_Clock2.default, { zone: zone.title });
+          return _nervjs2.default.createElement(_Clock2.default, { zone: zone });
         })
       );
     }
@@ -3283,7 +3287,11 @@ var App = function (_React$Component) {
     key: "zones",
     get: function get() {
       return [{
-        title: 'Berlin'
+        title: 'Berlin',
+        GMT: 'CET'
+      }, {
+        title: 'San Francisco',
+        GMT: 'GMT-8'
       }];
     }
   }]);
@@ -3324,7 +3332,7 @@ function Module() {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://' + window.location.hostname + ':60258/');
+  var ws = new WebSocket('ws://' + window.location.hostname + ':55541/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 

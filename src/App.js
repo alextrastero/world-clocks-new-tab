@@ -11,7 +11,12 @@ class App extends React.Component {
   get zones() {
     return [
       {
-        title: 'Berlin'
+        title: 'Berlin',
+        GMT: 'CET'
+      },
+      {
+        title: 'San Francisco',
+        GMT: 'GMT-8'
       }
     ]
   }
@@ -19,7 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        {this.zones.map((zone) => <Clock zone={zone.title} />)}
+        {this.zones.map((zone) => <Clock zone={zone} />)}
       </div>
     )
   }

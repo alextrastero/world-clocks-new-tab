@@ -34,6 +34,7 @@
       clock.initialize = function() {
         if (document.getElementById('background') && 
             document.getElementById('dial') &&
+            document.getElementById('dial') &&
             document.getElementById('hourHand') &&
             document.getElementById('minuteHand') &&
             document.getElementById('secondHand') && 
@@ -46,6 +47,8 @@
               this[params[i].name] = params[i].value.toLowerCase();
             }
           }
+
+          console.log(this.utc)
  
           // set clock colors
           this.setColorForElement('background');

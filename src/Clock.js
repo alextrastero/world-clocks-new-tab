@@ -8,6 +8,7 @@ const Clock = ({ zone }) => {
     <div className='clock'>
       <div className='clock__svg-wrapper'>
         <object data={clockSVG} type="image/svg+xml" width="200" height="200">
+          <param name="gmt"                value={zone.GMT}/>
           <param name="dial"               value="austria"/>
           <param name="hourHand"           value="swiss"/>
           <param name="minuteHand"         value="swiss"/>
@@ -26,13 +27,16 @@ const Clock = ({ zone }) => {
           <param name="updateInterval"     value="50"/>
         </object>
       </div>
-      { zone && <p className='clock__svg-wrapper'>{zone}</p> }
+      { zone && <p className='clock__svg-wrapper'>{zone.title}</p> }
     </div>
   )
 }
 
 Clock.propTypes = {
-  zone: PropTypes.string
+  zone: PropTypes.shape({
+    GMT: PropTypes.string,
+    title: PropTypes.string
+  })
 }
 
 export default Clock
