@@ -1,11 +1,12 @@
 {
   "name": "world-clocks-new-tab",
-  "version": "1.0.0",
-  "description": "WorldClocks New Tab - Chrome extensino to visualize different time zones on each tab",
+  "version": "1.0.1",
+  "description": "WorldClocks New Tab - Chrome extension to visualise different time zones on each tab",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build index.html --public-url ./ && cp manifest.json dist/",
+    "build": "parcel build index.html --public-url ./ && cp manifest.json dist/ && npm run compress",
+    "compress": "zip -r world-clocks-new-tab.zip dist/",
     "start": "parcel index.html"
   },
   "keywords": [
