@@ -8,19 +8,10 @@ class App extends React.Component {
     super()
   }
 
-  get zones() {
-    return [
-      {
-        title: 'Berlin',
-        timezone: 'Europe/Berlin'
-      }
-    ]
-  }
-
   render() {
     return (
       <div className="app">
-        <Clocks zones={this.zones} />
+        <Clocks />
       </div>
     )
   }

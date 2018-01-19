@@ -76,22 +76,9 @@
         }
       }
 
-      clock.toTimezone = function(timezone) {
-        var now = new Date();
-
-        if (!timezone) {
-          return now;
-        }
-
-        var hourInTimezone = now.toLocaleString('en-GB', { timeZone: timezone, hour: 'numeric' });
-        now.setHours(hourInTimezone);
-
-        return now;
-      }
-
       // draw the clock
       clock.draw = function() {
-        var now = clock.toTimezone(this.timezone);
+        var now = new Date();
 
         var hours   = now.getHours();
         var minutes = now.getMinutes();
