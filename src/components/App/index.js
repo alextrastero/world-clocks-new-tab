@@ -1,5 +1,6 @@
 import React from 'react'
 import Clocks from '../Clocks/'
+import ZoneChooser from '../ZoneChooser/';
 
 import './App.css';
 
@@ -11,7 +12,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Clocks />
+        <ZoneChooser visible />
+        <Clocks zones={this.zones} />
       </div>
     )
   }
