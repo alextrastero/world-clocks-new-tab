@@ -1,0 +1,31 @@
+{
+  "name": "world-clocks-new-tab",
+  "version": "1.0.0",
+  "description": "WorldClocks New Tab - Chrome extensino to visualize different time zones on each tab",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html"
+  },
+  "keywords": [
+    "new-tab",
+    "chrome-extension",
+    "clocks",
+    "time",
+    "world-clocks",
+    "timezones"
+  ],
+  "author": "Alexander Odell <alextrastero@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "nervjs": "^1.2.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.0.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.4.1"
+  }
+}
