@@ -1,0 +1,33 @@
+.clocks {
+  display: grid;
+  justify-items: center;
+  justify-content: space-around;
+  align-content: center;
+  height: 100vh;
+}
+
+.clocks--two {
+  grid-template-columns: repeat(2, 50%);
+  margin: 0 8rem;
+}
+
+.clocks--XL {
+  grid-template-columns: repeat(3, 33%);
+}
+
+.clocks__clock {
+  height: 46vh;
+  margin: 2vh 0;
+  text-align: center;
+}
+
+.clocks__clock-timezone {
+  font-size: 2em;
+  margin-top: .8rem;
+}
+
+.clocks__clock-svg-wrapper {
+  border-radius: 50%;
+  padding: .6rem;
+  background: white;
+}

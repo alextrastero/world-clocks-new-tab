@@ -1,5 +1,5 @@
 import React from 'react'
-import Clock from './Clock'
+import Clocks from '../Clocks/'
 
 import './App.css';
 
@@ -12,19 +12,15 @@ class App extends React.Component {
     return [
       {
         title: 'Berlin',
-        GMT: 'CET'
-      },
-      {
-        title: 'San Francisco',
-        GMT: 'GMT-8'
+        timezone: 'Europe/Berlin'
       }
     ]
   }
 
   render() {
     return (
-      <div className="container">
-        {this.zones.map((zone) => <Clock zone={zone} />)}
+      <div className="app">
+        <Clocks zones={this.zones} />
       </div>
     )
   }

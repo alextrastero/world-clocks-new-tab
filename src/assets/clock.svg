@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 
+<!--
      station-clock.svg
 
      Copyright (c) 2012 Rüdiger Appel
      Licensed under the creative common license.
-     
+
      Date:    2012-03-23
      Version: 1.0
      Email:   ludi(at)me(dot)com
@@ -32,12 +32,12 @@
 
       // initialize clock
       clock.initialize = function() {
-        if (document.getElementById('background') && 
+        if (document.getElementById('background') &&
             document.getElementById('dial') &&
             document.getElementById('dial') &&
             document.getElementById('hourHand') &&
             document.getElementById('minuteHand') &&
-            document.getElementById('secondHand') && 
+            document.getElementById('secondHand') &&
             document.getElementById('axisCover')) {
 
           // get html parameter and set clock attributes
@@ -48,8 +48,6 @@
             }
           }
 
-          console.log(this.utc)
- 
           // set clock colors
           this.setColorForElement('background');
           this.setColorForElement('dial');
@@ -78,9 +76,23 @@
         }
       }
 
+      clock.toTimezone = function(timezone) {
+        var now = new Date();
+
+        if (!timezone) {
+          return now;
+        }
+
+        var hourInTimezone = now.toLocaleString('en-GB', { timeZone: timezone, hour: 'numeric' });
+        now.setHours(hourInTimezone);
+
+        return now;
+      }
+
       // draw the clock
       clock.draw = function() {
-        var now     = new Date();
+        var now = clock.toTimezone(this.timezone);
+
         var hours   = now.getHours();
         var minutes = now.getMinutes();
         var seconds = now.getSeconds();
@@ -393,10 +405,10 @@
         <polygon points="95,33 105,33 106,125 94,125" style="stroke:none"/>
       </g>
       <g id="hourHandGerman" visibility="hidden">
-        <rect x="95" y="40" width="10" height="65" style="stroke:none"/>      
+        <rect x="95" y="40" width="10" height="65" style="stroke:none"/>
       </g>
       <g id="hourHandSiemens" visibility="hidden">
-        <rect x="97.3" y="65" width="5.4" height="35" style="stroke:none"/>      
+        <rect x="97.3" y="65" width="5.4" height="35" style="stroke:none"/>
         <circle cx="97.3" cy="58.5" r="9" style="stroke:none"/>
         <circle cx="102.7" cy="58.5" r="9" style="stroke:none"/>
         <path d="M 88.3,58.5 Q 88.3,52 100,37.5 Q 111.7,52 111.7,58.5 Z" style="stroke:none"/>
@@ -414,7 +426,7 @@
         <polygon points="96,5 104,5 105,125 95,125" style="stroke:none"/>
       </g>
       <g id="minuteHandGerman" visibility="hidden">
-        <rect x="95" y="6" width="8" height="99" style="stroke:none"/>      
+        <rect x="95" y="6" width="8" height="99" style="stroke:none"/>
       </g>
       <g id="minuteHandSiemens" visibility="hidden">
         <polygon points="95.3,49 99.5,2 100.5,2 104.7,49 102.7,100 97.3,100" style="stroke:none"/>
@@ -455,4 +467,4 @@
   </g>
 
 </svg>
- 
+
