@@ -1,21 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import './Clocks.css';
 import clockSVG from '../../assets/clock.svg'
-
-const modifier = (count) => {
-  let modifier = `clocks--`;
-  if (count == 2) {
-    modifier += 'two';
-  } else if (count > 2) {
-    modifier += 'XL';
-  } else {
-    modifier = '';
-  }
-
-  return modifier;
-}
 
 const renderClock = (zone, idx) => {
   return (
@@ -41,19 +27,11 @@ const renderClock = (zone, idx) => {
           <param name="updateInterval"     value="30000"/>
         </object>
       </div>
-      <p className='clocks__clock-timezone'>{zone.title}</p>
     </div>
   );
 };
 
 const Clocks = ({ zones }) =>
-  <div className={`clocks ${modifier(zones.length)}`}>{ zones.map(renderClock) }</div>
-
-Clocks.propTypes = {
-  zone: PropTypes.shape({
-    GMT: PropTypes.string,
-    title: PropTypes.string
-  })
-}
+  <div className={`clocks`}>{ zones.map(renderClock) }</div>
 
 export default Clocks
