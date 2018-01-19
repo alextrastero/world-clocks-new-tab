@@ -1,0 +1,9 @@
+{
+  "name": "WorldClocks New Tab",
+  "description": "Chrome extensino to visualize different time zones on each tab",
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "version": "1.0.0",
+  "manifest_version": 2
+}
