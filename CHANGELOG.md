@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 1.0.2
+
+ - Add Content-Security-Policy to head
+
 ## 1.0.1
 
  - Fixes description and adds compress task to package.json
