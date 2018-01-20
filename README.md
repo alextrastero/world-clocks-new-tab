@@ -2,4 +2,4 @@
 ## Railway Station Clock chrome extension
 
 ### kudos
-- Rüdiger Appel @ 3Quarks for the `station-clock.svg`
+- 3Quarks » SVG Railway Station Clock, Rüdiger Appel
