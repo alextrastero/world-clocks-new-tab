@@ -1,2 +1,5 @@
 # WorldClocks New Tab
-## Chrome extensino to visualize different time zones on each tab
+## Railway Station Clock chrome extension
+
+### kudos
+- Rüdiger Appel @ 3Quarks for the `station-clock.svg`
