@@ -9,10 +9,17 @@ class App extends React.Component {
     super()
   }
 
+  get zones() {
+    return [
+      { title: 'Los Angeles', timezone: 'America/Los_Angeles' },
+      { title: 'Berlin', timezone: 'Europe/Berlin' }
+    ]
+  }
+
   render() {
     return (
       <div className="app">
-        <ZoneChooser visible />
+        <ZoneChooser />
         <Clocks zones={this.zones} />
       </div>
     )
