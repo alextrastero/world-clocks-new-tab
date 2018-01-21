@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "moment-timezone": "^0.5.14",
     "nervjs": "^1.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
