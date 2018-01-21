@@ -1,6 +1,7 @@
 const setupClockDate = (options, key) => {
   // the clock object
   var clock = {}
+
   Object.assign(clock, options)
 
   // hack

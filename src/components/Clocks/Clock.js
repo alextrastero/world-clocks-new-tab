@@ -1,12 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import setupClockDate from './setupClockDate.js'
 import ClockSVG from './ClockSVG.js'
 
 class Clock extends React.Component {
   componentDidMount () {
-    const options = Object.assign({}, {
-      timezone: this.props.zone.timezone,
+    const { options, zone, idx } = this.props
+
+    const defaultOptions = {
+      timezone: zone.timezone,
       dial: 'din 41091.1',
       hourHand: 'din 41092.3',
       minuteHand: 'din 41092.3',
@@ -23,24 +26,30 @@ class Clock extends React.Component {
       axisCoverColor: 'rgb(20,20,20)',
       axisCoverRadius: '0',
       updateInterval: '30000'
-    }, this.props.options)
+    }
 
-    setupClockDate(options, this.props.key)
+    setupClockDate(Object.assign({}, options, defaultOptions), idx)
   }
 
   render () {
     // timezones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-    const { key, zone } = this.props
+    const { idx, zone } = this.props
 
     return (
       <div className='clocks__clock'>
         <div className='clocks__clock-svg-wrapper'>
-          <ClockSVG key={key} />
+          <ClockSVG idx={idx} />
           <p className='clocks__clock-timezone'>{zone.title}</p>
         </div>
       </div>
     )
   }
+}
+
+Clock.propTypes = {
+  options: PropTypes.shape({}),
+  zone: PropTypes.shape({}),
+  idx: PropTypes.string
 }
 
 export default Clock
