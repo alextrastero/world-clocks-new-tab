@@ -5,7 +5,7 @@ const setupClockDate = (options, key) => {
 
   // hack
   clock.getClockElementById = function (id) {
-    return document.getElementById(`${key}${id}`);
+    return document.getElementById(`${key}${id}`)
   }
 
   clock.init = window.setInterval(function () { clock.initialize() }, 50)
@@ -19,7 +19,6 @@ const setupClockDate = (options, key) => {
       clock.getClockElementById('minuteHand') &&
       clock.getClockElementById('secondHand') &&
       clock.getClockElementById('axisCover')) {
-
       // set clock colors
       this.setColorForElement('background')
       this.setColorForElement('dial')

@@ -23,14 +23,14 @@ class Clock extends React.Component {
       axisCoverColor: 'rgb(20,20,20)',
       axisCoverRadius: '0',
       updateInterval: '30000'
-    }, this.props.options);
+    }, this.props.options)
 
     setupClockDate(options, this.props.key)
   }
 
   render () {
     // timezones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-    const { key, zone } = this.props;
+    const { key, zone } = this.props
 
     return (
       <div className='clocks__clock'>

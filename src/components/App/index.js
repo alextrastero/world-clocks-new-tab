@@ -1,24 +1,20 @@
 import React from 'react'
 import Clocks from '../Clocks/'
-import ZoneChooser from '../ZoneChooser/';
+import ZoneChooser from '../ZoneChooser/'
 
-import './App.css';
+import './App.css'
 
 class App extends React.Component {
-  constructor() {
-    super()
-  }
-
-  get zones() {
+  get zones () {
     return [
       { title: 'Los Angeles', timezone: 'America/Los_Angeles' },
       { title: 'Berlin', timezone: 'Europe/Berlin' }
     ]
   }
 
-  render() {
+  render () {
     return (
-      <div className="app">
+      <div className='app'>
         <ZoneChooser />
         <Clocks zones={this.zones} />
       </div>

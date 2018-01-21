@@ -1,9 +1,21 @@
 .zone-chooser {
   position: absolute;
   right: 0;
-  left: 0;
-  bottom: 0;
   top: 0;
-  background: indianred;
   color: white;
+  background: indianred;
+}
+
+.zone-chooser.is-active .zone-chooser__chooser,
+.zone-chooser .zone-chooser__opener {
+  display: block;
+}
+
+.zone-chooser .zone-chooser__chooser,
+.zone-chooser.is-active .zone-chooser__opener {
+  display: none;
+}
+
+.zone-chooser.is-active {
+  /* display: block; */
 }
