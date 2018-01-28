@@ -1,7 +1,66 @@
 .zone-chooser {
+  max-width: 20rem;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: .6rem;
+  top: .6rem;
+  font-family: arial;
+  font-size: smaller;
+}
+
+.zone-chooser__opener a {
+  background: transparent url('../../../assets/settings-work-tool.svg') no-repeat center;
+  box-sizing: border-box;
+  font-size: 0;
+  height: 1.2rem;
+  width: 1.2rem;
+  display: block;
+}
+
+.zone-chooser__chooser {
+  padding: 1.2rem;
+  background-color: #ddd;
+  border-radius: .2rem;
+}
+
+.zone-chooser__form > * {
+  margin: 0;
+  padding: 0;
+}
+
+.zone-chooser__form label:not(:first-child) {
+  margin-top: .4rem;
+}
+
+.zone-chooser p {
+  margin-top: 0;
+}
+
+.zone-chooser ul {
+  margin-left: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.zone-chooser__form label {
+  display: block;
+}
+
+.zone-chooser button {
+  margin-left: .4rem;
+}
+
+.zone-chooser__save {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.zone-chooser__form input {
+  display: block;
+  width: 100%;
+}
+
+.zone-chooser__form input[type=submit] {
+  margin-top: .6rem;
 }
 
 .zone-chooser.is-active .zone-chooser__chooser,
