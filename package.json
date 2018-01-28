@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build index.html --public-url ./ && cp manifest.json dist/ && npm run compress",
+    "build": "parcel build index.html --public-url ./ && npm run manifest && npm run assets && npm run compress",
     "compress": "zip -r world-clocks-new-tab.zip dist/",
+    "manifest": "cp manifest.json dist/",
+    "assets": "cp -R assets dist/",
     "start": "parcel index.html"
   },
   "keywords": [
