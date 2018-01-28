@@ -40,9 +40,8 @@ class Clock extends React.Component {
   }
 
   render () {
-    // timezones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
     const { zone, idx } = this.props
+
     return (
       <div className='clocks__clock'>
         <div className='clocks__clock-svg-wrapper'>
@@ -55,8 +54,10 @@ class Clock extends React.Component {
 }
 
 Clock.propTypes = {
-  options: PropTypes.shape({}),
-  zone: PropTypes.shape({}),
+  zone: PropTypes.shape({
+    title: PropTypes.string,
+    timezone: PropTypes.string
+  }),
   idx: PropTypes.string
 }
 
