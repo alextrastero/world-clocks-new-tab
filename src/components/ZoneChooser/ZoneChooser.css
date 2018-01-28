@@ -2,8 +2,6 @@
   position: absolute;
   right: 0;
   top: 0;
-  color: white;
-  background: indianred;
 }
 
 .zone-chooser.is-active .zone-chooser__chooser,

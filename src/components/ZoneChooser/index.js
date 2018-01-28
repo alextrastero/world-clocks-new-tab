@@ -10,7 +10,7 @@ class ZoneChooser extends React.Component {
     super()
 
     this.state = {
-      active: true
+      active: false
     }
 
     this.toggleVisible = this.toggleVisible.bind(this)
@@ -45,7 +45,7 @@ class ZoneChooser extends React.Component {
     const timezone = form.timezone.value
 
     if (!isValid({ title, timezone }, timezones)) {
-      this.setState({ error: 'Can\'t be empty or wrong timezone or already exists' })
+      this.setState({ error: 'Can\'t be empty or wrong timezone or already exists\nhttps://en.wikipedia.org/wiki/List_of_tz_database_time_zones' })
       return
     }
 
@@ -74,7 +74,7 @@ class ZoneChooser extends React.Component {
     return (
       <div className={cx('zone-chooser', { 'is-active': active })}>
         <div className='zone-chooser__opener'>
-          <button onClick={this.toggleVisible}>Open</button>
+          <button onClick={this.toggleVisible}>Config</button>
         </div>
         <div className='zone-chooser__chooser'>
           <div>

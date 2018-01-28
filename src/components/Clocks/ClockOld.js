@@ -42,9 +42,7 @@ class Clock extends React.Component {
   }
 
   render () {
-    // timezones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
     const { idx, zone } = this.props
-    // console.log(idx)
 
     return (
       <div className='clocks__clock'>
