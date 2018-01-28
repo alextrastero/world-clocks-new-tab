@@ -1,55 +1,52 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import TimezoneClock from './setupClockDate.js'
-import ClockSVG from './ClockSVG.js'
+import StationClock from './station-clock'
 
 class Clock extends React.Component {
   constructor () {
     super()
-    this.clock = null
-  }
 
-  componentDidMount () {
-    const { options, zone, idx } = this.props
-
-    const defaultOptions = {
-      // timezone: zone && zone.timezone,
-      // dial: 'din 41091.1',
-      // hourHand: 'din 41092.3',
-      // minuteHand: 'din 41092.3',
-      // secondHand: 'din 41092.3',
-      // minuteHandBehavior: 'stepping',
-      // secondHandBehavior: 'swinging',
-      // secondHandStopToGo: 'yes',
-      // secondHandStopTime: '1.5',
-      // backgroundColor: 'rgba(0,0,0,0)',
-      // dialColor: 'rgb(40,40,40)',
-      // hourHandColor: 'rgb(20,20,20)',
-      // minuteHandColor: 'rgb(20,20,20)',
-      // secondHandColor: 'rgb(160,50,40)',
-      // axisCoverColor: 'rgb(20,20,20)',
-      // axisCoverRadius: '0',
-      // updateInterval: '150'
-    }
-    const config = Object.assign({}, options, defaultOptions)
-    this.clock = new TimezoneClock(config, idx)
-    this.clock.init()
+    this.initializeClock = this.initializeClock.bind(this)
   }
 
   componentWillUnmount () {
-    this.clock = null
+    this.clock = undefined
+    window.clearInterval(this.interval)
+  }
+
+  componentDidMount () {
+    this.initializeClock()
+  }
+
+  initializeClock () {
+    const { zone = {}, idx } = this.props
+
+    this.clock = new StationClock(idx)
+    this.clock.timezone = zone.timezone
+    this.clock.body = StationClock.RoundBody
+    this.clock.dial = StationClock.GermanStrokeDial
+    this.clock.hourHand = StationClock.PointedHourHand
+    this.clock.minuteHand = StationClock.PointedMinuteHand
+    this.clock.secondHand = StationClock.NoSecondHand
+    this.clock.boss = StationClock.NoBoss
+    this.clock.minuteHandBehavoir = StationClock.BouncingMinuteHand
+    this.clock.secondHandBehavoir = StationClock.BouncingSecondHand
+
+    this.clock.draw()
+    var that = this
+    this.interval = window.setInterval(function () {
+      that.clock.draw()
+    }, 20000)
   }
 
   render () {
     // timezones https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-    const { idx, zone } = this.props
-    // console.log(idx)
 
+    const { zone, idx } = this.props
     return (
       <div className='clocks__clock'>
         <div className='clocks__clock-svg-wrapper'>
-          <ClockSVG idx={idx} />
+          <canvas id={idx} width='200' height='200' />
           {zone && <p className='clocks__clock-timezone'>{zone.title}</p>}
         </div>
       </div>

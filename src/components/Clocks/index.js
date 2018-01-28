@@ -15,6 +15,7 @@ const Clocks = ({ zones }) => {
   )
 
   const renderZones = () => {
+    // TODO fix this, you can get an array of 1
     if (!zones.length) {
       return <Clock idx='clock' />
     }
