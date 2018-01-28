@@ -1,35 +1,39 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import cx from 'classnames'
 
-import './Clocks.css';
-import clockSVG from '../../assets/clock.svg'
+import Clock from './Clock.js'
+import './Clocks.css'
 
-const Clocks = () => {
+const Clocks = ({ timezones }) => {
+  const className = cx(
+    'clocks',
+    {
+      'clocks--two': timezones.length === 2,
+      'clocks--XL': timezones.length > 2
+    }
+  )
+
+  const renderTimezones = () => {
+    // TODO fix this, you can get an array of 1
+    if (!timezones.length) {
+      return <Clock idx='clock' />
+    }
+
+    return timezones.map((zone, idx) =>
+      <Clock zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />
+    )
+  }
+
   return (
-    <div className='clocks'>
-      <div className='clocks__clock'>
-        <div className='clocks__clock-svg-wrapper'>
-          <object data={clockSVG} type="image/svg+xml" width="200" height="200">
-            <param name="dial"               value="din 41091.1"/>
-            <param name="hourHand"           value="din 41092.3"/>
-            <param name="minuteHand"         value="din 41092.3"/>
-            <param name="secondHand"         value="none"/>
-            <param name="minuteHandBehavior" value="stepping"/>
-            <param name="secondHandBehavior" value="swinging"/>
-            <param name="secondHandStopToGo" value="yes"/>
-            <param name="secondHandStopTime" value="1.5"/>
-            <param name="backgroundColor"    value="rgba(0,0,0,0)"/>
-            <param name="dialColor"          value="rgb(40,40,40)"/>
-            <param name="hourHandColor"      value="rgb(20,20,20)"/>
-            <param name="minuteHandColor"    value="rgb(20,20,20)"/>
-            <param name="secondHandColor"    value="rgb(160,50,40)"/>
-            <param name="axisCoverColor"     value="rgb(20,20,20)"/>
-            <param name="axisCoverRadius"    value="0"/>
-            <param name="updateInterval"     value="30000"/>
-          </object>
-        </div>
-      </div>
+    <div className={className}>
+      {renderTimezones()}
     </div>
   )
+}
+
+Clocks.propTypes = {
+  timezones: PropTypes.array.isRequired
 }
 
 export default Clocks

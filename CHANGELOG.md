@@ -1,5 +1,13 @@
 # world-clocks-new-tab
 
+## 1.1.1
+
+ - Fix manifest `content_security_policy`
+
+## 1.1.0
+
+ - Add multiple timezones support
+
 ## 1.0.2
 
  - Add Content-Security-Policy to head

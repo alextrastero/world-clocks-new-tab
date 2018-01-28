@@ -1,0 +1,19 @@
+.zone-chooser {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.zone-chooser.is-active .zone-chooser__chooser,
+.zone-chooser .zone-chooser__opener {
+  display: block;
+}
+
+.zone-chooser .zone-chooser__chooser,
+.zone-chooser.is-active .zone-chooser__opener {
+  display: none;
+}
+
+.zone-chooser.is-active {
+  /* display: block; */
+}
