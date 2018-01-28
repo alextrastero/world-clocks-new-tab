@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 1.1.0
+
+ - Add multiple timezones support
+
 ## 1.0.2
 
  - Add Content-Security-Policy to head
