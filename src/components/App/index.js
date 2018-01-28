@@ -27,7 +27,9 @@ class App extends React.Component {
       console.error('Wrong Clock format', err)
     }
 
-    this.setState({ timezones })
+    if (timezones !== null) {
+      this.setState({ timezones })
+    }
   }
 
   updateTimezones (timezones) {

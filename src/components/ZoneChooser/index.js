@@ -69,7 +69,7 @@ class ZoneChooser extends React.Component {
 
   render () {
     const { error, active } = this.state
-    const { timezones } = this.props
+    const { timezones = [] } = this.props
 
     return (
       <div className={cx('zone-chooser', { 'is-active': active })}>
