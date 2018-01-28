@@ -10,12 +10,13 @@ class ZoneChooser extends React.Component {
     super()
 
     this.state = {
-      active: false,
-      timezones: []
+      active: true
     }
 
     this.toggleVisible = this.toggleVisible.bind(this)
     this.addTimezone = this.addTimezone.bind(this)
+    this.removeTimezone = this.removeTimezone.bind(this)
+    this.renderZoneListElem = this.renderZoneListElem.bind(this)
   }
 
   toggleVisible () {
@@ -23,12 +24,22 @@ class ZoneChooser extends React.Component {
   }
 
   renderZoneListElem (zone, idx) {
-    return <li key={idx}>{zone.title}: {zone.timezone} <button>✖︎</button></li>
+    return (
+      <li key={idx}>{zone.title}: {zone.timezone}
+        <button onClick={() => this.removeTimezone(idx)}>&#10006;</button>
+      </li>
+    )
+  }
+
+  removeTimezone (idx) {
+    const updated = Array.from([...this.props.timezones])
+    updated.splice(idx, 1)
+    this.props.updateTimezones(updated)
   }
 
   addTimezone (evt) {
     evt.preventDefault()
-    const { timezones, addTimezone } = this.props
+    const { timezones, updateTimezones } = this.props
     const form = evt.target
     const title = form.title.value
     const timezone = form.timezone.value
@@ -38,7 +49,7 @@ class ZoneChooser extends React.Component {
       return
     }
 
-    addTimezone(timezones.concat({ title, timezone }))
+    updateTimezones(timezones.concat({ title, timezone }))
 
     // TODO move to willReceiveProps
     this.setState({ error: '' })
@@ -48,34 +59,31 @@ class ZoneChooser extends React.Component {
     return (
       <div>
         <form onSubmit={this.addTimezone}>
-          <label htmlFor='title'>title
-            <input name='title' defaultValue='pepe' />
-          </label>
-          <label htmlFor='timezone'>timezone
-            <input name='timezone' defaultValue='Europe/Berlin' />
-          </label>
-          <input type='submit' value='add' />
+          <label htmlFor='title'>title<input name='title' defaultValue='Berlin' /></label>
+          <label htmlFor='timezone'>timezone<input name='timezone' defaultValue='Europe/Berlin' /></label>
+          <input type='submit' value='Add' />
         </form>
       </div>
     )
   }
 
   render () {
-    const { zones } = this.props
-    const { timezones, error, active } = this.state
+    const { error, active } = this.state
+    const { timezones } = this.props
 
     return (
       <div className={cx('zone-chooser', { 'is-active': active })}>
         <div className='zone-chooser__opener'>
           <button onClick={this.toggleVisible}>Open</button>
         </div>
-        <div>
-          {this.renderForm()}
-          <small>{error}</small>
-        </div>
         <div className='zone-chooser__chooser'>
-          {zones.length && zones.map(this.renderZoneListElem)}
-          <button onClick={this.toggleVisible}>Add</button>
+          <div>
+            {this.renderForm()}
+            <small>{error}</small>
+          </div>
+          <ul>
+            {timezones.map(this.renderZoneListElem)}
+          </ul>
           <button onClick={this.toggleVisible}>Save</button>
         </div>
       </div>
@@ -84,10 +92,11 @@ class ZoneChooser extends React.Component {
 }
 
 ZoneChooser.propTypes = {
-  zones: PropTypes.arrayOf(PropTypes.shape({
+  timezones: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string,
     timezone: PropTypes.string
-  }))
+  })),
+  updateTimezones: PropTypes.func
 }
 
 export default ZoneChooser

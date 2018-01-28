@@ -9,40 +9,39 @@ import './App.css'
 class App extends React.Component {
   constructor () {
     super()
+
+    this.localStorageItemKey = 'worldClockTimezones'
     this.state = {
       timezones: []
     }
 
-    this.addTimezone = this.addTimezone.bind(this)
+    this.updateTimezones = this.updateTimezones.bind(this)
   }
 
-  get zones () {
-    return this.state.timezones
-    // return localStorage.getItem('worldClockTimezones') || []
-    // [
-    // { title: 'Los Angeles', timezone: 'America/Los_Angeles' },
-    // { title: 'Berlin', timezone: 'Europe/Berlin' }
-    // ]
+  componentWillMount () {
+    let timezones = []
+
+    try {
+      timezones = JSON.parse(localStorage.getItem(this.localStorageItemKey))
+    } catch (err) {
+      console.error('Wrong Clock format', err)
+    }
+
+    this.setState({ timezones })
   }
 
-  componentDidMount () {
-    // const timezones = localStorage.getItem('worldClockTimezones') || []
-    // this.setState({ timezones })
-  }
-
-  addTimezone (timezones) {
+  updateTimezones (timezones) {
+    localStorage.setItem(this.localStorageItemKey, JSON.stringify(timezones))
     this.setState({ timezones })
   }
 
   render () {
+    const { timezones } = this.state
+
     return (
       <div className='app'>
-        <ZoneChooser
-          timezones={this.state.timezones}
-          zones={this.zones}
-          addTimezone={this.addTimezone}
-        />
-        <Clocks zones={this.zones} />
+        <ZoneChooser timezones={timezones} updateTimezones={this.updateTimezones} />
+        <Clocks timezones={timezones} />
       </div>
     )
   }
