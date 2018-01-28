@@ -14,9 +14,19 @@ const Clocks = ({ zones }) => {
     }
   )
 
+  const renderZones = () => {
+    if (!zones.length) {
+      return <Clock idx='clock' />
+    }
+
+    return zones.map((zone, idx) =>
+      <Clock zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />
+    )
+  }
+
   return (
     <div className={className}>
-      { zones.map((zone, idx) => <Clock zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />) }
+      {renderZones()}
     </div>
   )
 }
