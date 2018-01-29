@@ -10,7 +10,7 @@ class ZoneChooser extends React.Component {
     super()
 
     this.state = {
-      active: true
+      active: false
     }
 
     this.toggleVisible = this.toggleVisible.bind(this)
@@ -27,7 +27,7 @@ class ZoneChooser extends React.Component {
   renderZoneListElem (zone, idx) {
     return (
       <li key={idx}>{zone.title}: {zone.timezone}
-        <button onClick={() => this.removeTimezone(idx)}>delete</button>
+        <button onClick={() => this.removeTimezone(idx)}>x</button>
       </li>
     )
   }
