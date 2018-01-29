@@ -94,7 +94,7 @@ function StationClock (clockId) {
 
   // body dial
   this.dial = StationClock.GermanStrokeDial
-  this.dialColor = 'rgb(60,60,60)'
+  this.dialColor = 'rgb(0,0,0)'
 
   // clock hands
   this.hourHand = StationClock.PointedHourHand
@@ -400,10 +400,11 @@ StationClock.prototype.getAnimationOffset = function (animationStep) {
 
 StationClock.prototype.setShadow = function (context, color, offsetX, offsetY, blur) {
   if (color) {
-  	context.shadowColor = color
-  	context.shadowOffsetX = this.radius * offsetX
-  	context.shadowOffsetY = this.radius * offsetY
-  	context.shadowBlur = this.radius * blur
+    // REMOVED Shadow for now
+    // context.shadowColor = color
+    // context.shadowOffsetX = this.radius * offsetX
+    // context.shadowOffsetY = this.radius * offsetY
+    // context.shadowBlur = this.radius * blur
   }
 }
 
@@ -443,12 +444,12 @@ StationClock.prototype.strokeSquare = function (context, color, x, y, size, line
 
 StationClock.prototype.strokeLine = function (context, color, x1, y1, x2, y2, width) {
   if (color) {
-	  context.beginPath()
-	  context.strokeStyle = color
-	  context.moveTo(x1 * this.radius, y1 * this.radius)
-	  context.lineTo(x2 * this.radius, y2 * this.radius)
-	  context.lineWidth = width * this.radius
-	  context.stroke()
+    context.beginPath()
+    context.strokeStyle = color
+    context.moveTo(x1 * this.radius, y1 * this.radius)
+    context.lineTo(x2 * this.radius, y2 * this.radius)
+    context.lineWidth = width * this.radius
+    context.stroke()
   }
 }
 
