@@ -6,8 +6,8 @@ import isValid from './form-validator'
 import './ZoneChooser.css'
 
 class ZoneChooser extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       active: false

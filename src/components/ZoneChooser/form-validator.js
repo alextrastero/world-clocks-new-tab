@@ -1,4 +1,4 @@
-export default ({ title, timezone }, timezones) => {
+export default ({ title, timezone }, timezones = []) => {
   var valid = true
 
   if (!title || !timezone) {
