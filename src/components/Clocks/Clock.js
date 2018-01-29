@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import StationClock from './station-clock'
 
 class Clock extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.initializeClock = this.initializeClock.bind(this)
   }

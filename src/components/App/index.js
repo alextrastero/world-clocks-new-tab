@@ -7,8 +7,8 @@ import ZoneChooser from '../ZoneChooser/'
 import './App.css'
 
 class App extends React.Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.localStorageItemKey = 'worldClockTimezones'
     this.state = {
