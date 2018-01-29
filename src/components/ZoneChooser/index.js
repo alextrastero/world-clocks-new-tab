@@ -19,14 +19,15 @@ class ZoneChooser extends React.Component {
     this.renderZoneListElem = this.renderZoneListElem.bind(this)
   }
 
-  toggleVisible () {
+  toggleVisible (evt) {
+    evt.preventDefault()
     this.setState({ active: !this.state.active })
   }
 
   renderZoneListElem (zone, idx) {
     return (
       <li key={idx}>{zone.title}: {zone.timezone}
-        <button onClick={() => this.removeTimezone(idx)}>&#10006;</button>
+        <button onClick={() => this.removeTimezone(idx)}>x</button>
       </li>
     )
   }
@@ -57,10 +58,10 @@ class ZoneChooser extends React.Component {
 
   renderForm () {
     return (
-      <div>
+      <div className='zone-chooser__form'>
         <form onSubmit={this.addTimezone}>
-          <label htmlFor='title'>title<input name='title' defaultValue='Berlin' /></label>
-          <label htmlFor='timezone'>timezone<input name='timezone' defaultValue='Europe/Berlin' /></label>
+          <label htmlFor='title'>Title: <input name='title' /></label>
+          <label htmlFor='timezone'>Timezone: <input name='timezone' /></label>
           <input type='submit' value='Add' />
         </form>
       </div>
@@ -74,9 +75,10 @@ class ZoneChooser extends React.Component {
     return (
       <div className={cx('zone-chooser', { 'is-active': active })}>
         <div className='zone-chooser__opener'>
-          <button onClick={this.toggleVisible}>Config</button>
+          <a href='#' onClick={this.toggleVisible}>Config</a>
         </div>
         <div className='zone-chooser__chooser'>
+          <p>Check out the <a href='https://en.wikipedia.org/wiki/List_of_tz_database_time_zones' target='_blank'>list of timezones</a>.</p>
           <div>
             {this.renderForm()}
             <small>{error}</small>
@@ -84,7 +86,7 @@ class ZoneChooser extends React.Component {
           <ul>
             {timezones.map(this.renderZoneListElem)}
           </ul>
-          <button onClick={this.toggleVisible}>Save</button>
+          <button className='zone-chooser__save' onClick={this.toggleVisible}>Save</button>
         </div>
       </div>
     )

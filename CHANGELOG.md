@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 1.1.2
+
+ - Add style to zone-chooser and change style of clock
+
 ## 1.1.1
 
  - Fix manifest `content_security_policy`
