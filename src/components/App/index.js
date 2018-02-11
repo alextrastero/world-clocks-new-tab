@@ -19,6 +19,10 @@ class App extends React.Component {
   }
 
   componentWillMount () {
+    if (this.state.timezones.length) {
+      return
+    }
+
     let timezones = []
 
     try {
