@@ -9,8 +9,23 @@
 
 .clocks__clock {
   width: 33.333%;
+  position: relative;
 }
 
 .clocks__clock-timezone {
   font-size: 2em;
+}
+
+.clocks__clock-settings {
+  background: transparent url('../../../assets/settings-work-tool.svg') no-repeat center;
+  height: 1.2rem;
+  width: 1.2rem;
+  position: absolute;
+  right: 1rem;
+  display: none;
+  cursor: pointer;
+}
+
+.clocks__clock:hover .clocks__clock-settings {
+  display: block;
 }
