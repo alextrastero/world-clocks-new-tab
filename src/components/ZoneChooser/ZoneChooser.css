@@ -5,6 +5,7 @@
   top: .6rem;
   font-family: arial;
   font-size: smaller;
+  z-index: 2;
 }
 
 .zone-chooser__opener a {
