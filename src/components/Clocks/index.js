@@ -1,39 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 
 import Clock from './Clock.js'
 import './Clocks.css'
 
-const Clocks = ({ timezones }) => {
-  const className = cx(
-    'clocks',
-    {
-      'clocks--two': timezones.length === 2,
-      'clocks--XL': timezones.length > 2
-    }
-  )
-
+const Clocks = ({ timezones, onEdit }) => {
   const renderTimezones = () => {
     // TODO fix this, you can get an array of 1
     if (!timezones.length) {
       return <Clock idx='clock' />
     }
 
-    return timezones.map((zone, idx) =>
-      <Clock zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />
-    )
+    return timezones.map((zone, idx) => (
+      <div className='clocks__clock'>
+        <Clock onEdit={() => onEdit(idx)} zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />
+      </div>
+    ))
   }
 
   return (
-    <div className={className}>
+    <div className='clocks'>
       {renderTimezones()}
     </div>
   )
 }
 
 Clocks.propTypes = {
-  timezones: PropTypes.array.isRequired
+  timezones: PropTypes.array.isRequired,
+  onEdit: PropTypes.func.isRequired
 }
 
 export default Clocks

@@ -3,6 +3,7 @@ import localStorage from 'localStorage'
 
 import Clocks from '../Clocks/'
 import ZoneChooser from '../ZoneChooser/'
+import Settings from '../Settings/'
 
 import './App.css'
 
@@ -12,16 +13,17 @@ class App extends React.Component {
 
     this.localStorageItemKey = 'worldClockTimezones'
     this.state = {
-      timezones: []
+      timezones: [],
+      editingId: null
     }
 
     this.updateTimezones = this.updateTimezones.bind(this)
+    this.updateSettings = this.updateSettings.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
   }
 
   componentWillMount () {
-    if (this.state.timezones.length) {
-      return
-    }
+    if (this.state.timezones.length) return
 
     let timezones = []
 
@@ -41,13 +43,26 @@ class App extends React.Component {
     this.setState({ timezones })
   }
 
+  handleEdit (idx) {
+    this.setState({ editingId: idx })
+  }
+
+  updateSettings (timezone) {
+    const { timezones, editingId } = this.state
+    timezones[editingId] = timezone
+
+    localStorage.setItem(this.localStorageItemKey, JSON.stringify(timezones))
+    this.setState({ editingId: null, timezones })
+  }
+
   render () {
-    const { timezones } = this.state
+    const { timezones, editingId } = this.state
 
     return (
       <div className='app'>
+        {editingId !== null && <Settings timezone={timezones[editingId]} updateSettings={this.updateSettings} />}
         <ZoneChooser timezones={timezones} updateTimezones={this.updateTimezones} />
-        <Clocks timezones={timezones} />
+        <Clocks onEdit={this.handleEdit} timezones={timezones} />
       </div>
     )
   }

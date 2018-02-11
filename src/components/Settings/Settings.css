@@ -1,0 +1,26 @@
+.settings {
+	position: fixed;
+	background: #eee;
+	border-radius: 4px;
+	font-family: sans-serif;
+	padding: 10px;
+	z-index: 1;
+	text-align: left;
+	left: 2rem;
+	top: 2rem;
+	bottom: 2rem;
+	right: 2rem;
+}
+
+.settings__submit {
+	position: absolute;
+	bottom: 1rem;
+}
+
+.settings label {
+	display: block;
+}
+
+.settings p {
+	margin: .6rem 0 .6rem 0;
+}

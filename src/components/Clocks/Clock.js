@@ -6,6 +6,17 @@ class Clock extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initialOptions = {
+      body: StationClock.RoundBody,
+      dial: StationClock.GermanStrokeDial,
+      hourHand: StationClock.PointedHourHand,
+      minuteHand: StationClock.PointedMinuteHand,
+      secondHand: StationClock.NoSecondHand,
+      boss: StationClock.NoBoss,
+      minuteHandBehavoir: StationClock.BouncingMinuteHand,
+      secondHandBehavoir: StationClock.BouncingSecondHand
+    }
+
     this.initializeClock = this.initializeClock.bind(this)
   }
 
@@ -20,23 +31,18 @@ class Clock extends React.Component {
 
   initializeClock () {
     const { zone = {}, idx } = this.props
+    // const { options = this.initialOptions } = this.state
 
     this.clock = new StationClock(idx)
     this.clock.timezone = zone.timezone
-    this.clock.body = StationClock.RoundBody
-    this.clock.dial = StationClock.GermanStrokeDial
-    this.clock.hourHand = StationClock.PointedHourHand
-    this.clock.minuteHand = StationClock.PointedMinuteHand
-    this.clock.secondHand = StationClock.NoSecondHand
-    this.clock.boss = StationClock.NoBoss
-    this.clock.minuteHandBehavoir = StationClock.BouncingMinuteHand
-    this.clock.secondHandBehavoir = StationClock.BouncingSecondHand
+    console.log(zone.settings)
+    Object.assign(this.clock, zone.settings)
 
     this.clock.draw()
     var that = this
     this.interval = window.setInterval(function () {
       that.clock.draw()
-    }, 20000)
+    }, 5000)
   }
 
   render () {
@@ -56,8 +62,10 @@ class Clock extends React.Component {
 Clock.propTypes = {
   zone: PropTypes.shape({
     title: PropTypes.string,
-    timezone: PropTypes.string
+    timezone: PropTypes.string,
+    settings: PropTypes.any
   }),
+  onEdit: PropTypes.func.isRequired,
   idx: PropTypes.string
 }
 
