@@ -1,12 +1,16 @@
 {
   "presets": ["env", "react"],
-  "plugins": [
-    ["module-resolver", {
-      "root": ["."],
-      "alias": {
-        "react": "nervjs",
-        "react-dom": "nervjs"
-      }
-    }]
-  ]
+  "env": {
+    "production": {
+      "plugins": [
+        ["module-resolver", {
+          "root": ["."],
+          "alias": {
+            "react": "nervjs",
+            "react-dom": "nervjs"
+          }
+        }]
+      ]
+    }
+  }
 }
