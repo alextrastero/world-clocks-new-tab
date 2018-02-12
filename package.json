@@ -4,7 +4,8 @@
   "description": "WorldClocks New Tab - Chrome extension to visualise different time zones on each tab",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build": "NODE_ENV=production parcel build index.html --public-url ./ && npm run manifest && npm run assets && npm run compress",
     "compress": "zip -r world-clocks-new-tab.zip dist/",
     "manifest": "cp manifest.json dist/",
@@ -33,6 +34,16 @@
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.2.2",
     "parcel-bundler": "^1.4.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/setupTests.js",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
