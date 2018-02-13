@@ -1,29 +1,20 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import localStorage from 'localStorage'
+
+jest.mock('localStorage')
 
 describe('<App />', function () {
-  let App;
-  let localStorage
   let getItemMock
   let setItemMock
 
   describe('with one timezone', () => {
+    let App
     beforeEach(() => {
-      jest.resetModules()
-
-      setItemMock = jest.fn()
-      getItemMock = jest.fn(() => JSON.stringify(
-        [
-          { title: 'Berlin', timezone: 'Europe/Berlin' }
-        ]
-      ))
-
-      jest.doMock('localStorage', () => ({
-        getItem: getItemMock,
-        setItem: setItemMock
-      }))
-
-      localStorage = require('localStorage')
+      localStorage.getItem.mockReset() // or restore? or something else
+      localStorage.getItem.mockImplementation(
+        jest.fn(() => JSON.stringify( [ { title: 'Berlin', timezone: 'Europe/Berlin' } ]))
+      )
       App = require('./index').default
     })
 
