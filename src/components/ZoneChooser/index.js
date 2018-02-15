@@ -10,7 +10,8 @@ class ZoneChooser extends React.Component {
     super(props)
 
     this.state = {
-      active: false
+      active: false,
+      error: {}
     }
 
     this.toggleVisible = this.toggleVisible.bind(this)
@@ -45,15 +46,16 @@ class ZoneChooser extends React.Component {
     const title = form.title.value
     const timezone = form.timezone.value
 
-    if (!isValid({ title, timezone }, timezones)) {
-      this.setState({ error: 'Can\'t be empty or wrong timezone or already exists\nhttps://en.wikipedia.org/wiki/List_of_tz_database_time_zones' })
+    const { valid, error } = isValid({ title, timezone }, timezones)
+    if (!valid) {
+      this.setState({ error })
       return
     }
 
     updateTimezones(timezones.concat({ title, timezone }))
 
     // TODO move to willReceiveProps
-    this.setState({ error: '' })
+    this.setState({ error: {} })
   }
 
   renderForm () {
@@ -61,7 +63,7 @@ class ZoneChooser extends React.Component {
       <div className='zone-chooser__form'>
         <form onSubmit={this.addTimezone}>
           <label htmlFor='title'>Title: <input name='title' /></label>
-          <label htmlFor='timezone'>Timezone: <input name='timezone' /></label>
+          <label htmlFor='timezone'>Timezone: <input name='timezone' /> </label>
           <input type='submit' value='Add' />
         </form>
       </div>
@@ -81,7 +83,7 @@ class ZoneChooser extends React.Component {
           <p>Check out the <a href='https://en.wikipedia.org/wiki/List_of_tz_database_time_zones' target='_blank'>list of timezones</a>.</p>
           <div>
             {this.renderForm()}
-            <small>{error}</small>
+            <small>{error.message}</small>
           </div>
           <ul>
             {timezones.map(this.renderZoneListElem)}
