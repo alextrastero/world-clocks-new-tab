@@ -56,6 +56,14 @@ describe('<ZoneChooser />', function () {
       expect(form.children().length).toBe(3)
     })
 
+    it('calls callback with new timezone plus existing ones', () => {
+      const timezones = wrapper.props().timezones
+      form.simulate('submit', formEvent('LA', 'America/Los_Angeles'))
+      expect(updateMock).toHaveBeenLastCalledWith(
+        timezones.concat({ title: 'LA', timezone: 'America/Los_Angeles'})
+      )
+    })
+
     it('handles errors#no-errors', () => {
       form.simulate('submit', formEvent('LA', 'America/Los_Angeles'))
       expect(wrapper.state().error).toEqual({})
