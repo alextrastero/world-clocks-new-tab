@@ -40,13 +40,13 @@ class Clock extends React.Component {
   }
 
   render () {
-    const { zone, idx } = this.props
+    const { zone = {}, idx } = this.props
 
     return (
       <div className='clocks__clock'>
         <div className='clocks__clock-svg-wrapper'>
           <canvas id={idx} width='200' height='200' />
-          {zone && <p className='clocks__clock-timezone'>{zone.title}</p>}
+          {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}
         </div>
       </div>
     )
