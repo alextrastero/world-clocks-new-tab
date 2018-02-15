@@ -2,26 +2,26 @@ import React from 'react'
 import PropTypes from 'prop-types'
 // import Clock from '../Clocks/Clock'
 import './Settings.css'
+import stationClockDefaults from './stationClockDefaults'
 import { config } from './config'
 
 class Settings extends React.Component {
   constructor (props) {
     super(props)
 
+    const { timezone } = props
     const defaultValues = {
-      body: 'RoundBody',
-      dial: 'GermanStrokeDial',
-      hourHand: 'PointedHourHand',
-      minuteHand: 'PointedMinuteHand',
-      secondHand: 'NoSecondHand',
-      boss: 'NoBoss',
-      minuteHandBehavoir: 'BouncingMinuteHand',
-      secondHandBehavoir: 'BouncingSecondHand'
+      body: stationClockDefaults['RoundBody'],
+      dial: stationClockDefaults['GermanStrokeDial'],
+      hourHand: stationClockDefaults['PointedHourHand'],
+      minuteHand: stationClockDefaults['PointedMinuteHand'],
+      secondHand: stationClockDefaults['NoSecondHand'],
+      boss: stationClockDefaults['NoBoss'],
+      minuteHandBehavoir: stationClockDefaults['BouncingMinuteHand'],
+      secondHandBehavoir: stationClockDefaults['BouncingSecondHand']
     }
 
-    console.log('props', props.timezone.settings.body)
-    const { timezone = { settings: defaultValues } } = props
-    console.log('value', timezone.settings.body)
+    timezone.settings = timezone.settings || defaultValues
 
     this.state = timezone.settings
     this.handleChange = this.handleChange.bind(this)
@@ -45,17 +45,15 @@ class Settings extends React.Component {
 
     return timezone && (
       <div className='settings'>
-        <div className='settings__preview'>
-          {`Editing: ${timezone.title}`}
-        </div>
+        <div className='settings__preview'>{`Editing: ${timezone.title}`}</div>
         <div className='settings__form'>
           <form onSubmit={this.onSave}>
             {Object.keys(config).map((key, idx) => (
-              <div>
+              <div key={`div-${idx}`}>
                 <p>{key}</p>
                 <select name={key} id={key} onChange={this.handleChange}>
-                  {config[key].map((val) => (
-                    <option selected={val.value === this.state[key]} value={val.value}>
+                  {config[key].map((val, idy) => (
+                    <option value={stationClockDefaults[val.value]} key={`option-${idy}`} selected={val.value === this.state[key]}>
                       {val.text}
                     </option>
                   ))}

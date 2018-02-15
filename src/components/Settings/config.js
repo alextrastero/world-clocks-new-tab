@@ -7,7 +7,7 @@ export const config = {
     { value: 'SquareBody', text: 'Square blue casing (German Rail)' }
   ],
   dial: [
-    { value: 'NoStrokeDial', text: 'Without dial' },
+    { value: 'NoDial', text: 'Without dial' },
     { value: 'GermanHourStrokeDial', text: 'Dial with hour indicators (DIN 41091, Sect. 3)' },
     { value: 'GermanStrokeDial', text: 'Dial with minute and hour indicators (DIN 41091, Sect. 1)' },
     { value: 'AustriaStrokeDial', text: 'Dial with minute and hour indicators (Austria)' },

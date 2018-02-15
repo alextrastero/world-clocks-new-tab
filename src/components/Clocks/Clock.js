@@ -31,12 +31,13 @@ class Clock extends React.Component {
 
   initializeClock () {
     const { zone = {}, idx } = this.props
-    // const { options = this.initialOptions } = this.state
+    const clockSettings = zone.settings || this.initialOptions
 
     this.clock = new StationClock(idx)
     this.clock.timezone = zone.timezone
-    console.log(zone.settings)
-    Object.assign(this.clock, zone.settings)
+    // Object.assign(this.clock, zone.settings)
+    console.log(StationClock[clockSettings.body])
+    Object.assign(this.clock, clockSettings) // THIS NEED PARSING!!
 
     this.clock.draw()
     var that = this
@@ -46,10 +47,11 @@ class Clock extends React.Component {
   }
 
   render () {
-    const { zone = {}, idx } = this.props
+    const { onEdit, zone = {}, idx } = this.props
 
     return (
       <div className='clocks__clock'>
+        {this.props.zone && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
           <canvas id={idx} width='200' height='200' />
           {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}

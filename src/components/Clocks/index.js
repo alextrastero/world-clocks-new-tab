@@ -8,21 +8,20 @@ const Clocks = ({ timezones, onEdit }) => {
   const renderTimezones = () => {
     // TODO fix this, you can get an array of 1
     if (!timezones.length) {
-      return <Clock idx='clock' />
+      return <Clock onEdit={() => onEdit('clock')} idx='clock' />
     }
 
-    return timezones.map((zone, idx) => (
-      <div className='clocks__clock'>
-        <Clock onEdit={() => onEdit(idx)} zone={zone} key={`clock${idx}`} idx={`clock${idx}`} />
-      </div>
-    ))
+    return timezones.map((zone, idx) =>
+      <Clock
+        onEdit={() => onEdit(idx)}
+        zone={zone}
+        key={`clock${idx}`}
+        idx={`clock${idx}`}
+      />
+    )
   }
 
-  return (
-    <div className='clocks'>
-      {renderTimezones()}
-    </div>
-  )
+  return <div className='clocks'>{renderTimezones()}</div>
 }
 
 Clocks.propTypes = {
