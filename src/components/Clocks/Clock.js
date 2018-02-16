@@ -19,7 +19,6 @@ class Clock extends React.Component {
 
     this.initializeClock = this.initializeClock.bind(this)
     this.isNewClock = this.isNewClock.bind(this)
-    this.handleSize = this.handleSize.bind(this)
   }
 
   componentWillUnmount () {
