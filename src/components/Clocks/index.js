@@ -8,7 +8,7 @@ const Clocks = ({ timezones, onEdit }) => {
   const renderTimezones = () => {
     // TODO fix this, you can get an array of 1
     if (!timezones.length) {
-      return <Clock onEdit={() => onEdit('clock')} idx='clock' />
+      return <Clock idx='clock' />
     }
 
     return timezones.map((zone, idx) =>
@@ -26,7 +26,7 @@ const Clocks = ({ timezones, onEdit }) => {
 
 Clocks.propTypes = {
   timezones: PropTypes.array.isRequired,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func
 }
 
 export default Clocks
