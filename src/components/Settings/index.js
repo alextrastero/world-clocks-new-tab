@@ -30,7 +30,7 @@ class Settings extends React.Component {
 
   handleChange (evt) {
     const { name, value } = evt.target
-    this.setState({ [name]: value })
+    this.setState({ [name]: parseInt(value) })
   }
 
   onSave (evt) {
@@ -42,6 +42,7 @@ class Settings extends React.Component {
 
   render () {
     const { timezone } = this.props
+    let value
 
     return timezone && (
       <div className='settings'>
@@ -52,11 +53,14 @@ class Settings extends React.Component {
               <div key={`div-${idx}`}>
                 <p>{key}</p>
                 <select name={key} id={key} onChange={this.handleChange}>
-                  {config[key].map((val, idy) => (
-                    <option value={stationClockDefaults[val.value]} key={`option-${idy}`} selected={val.value === this.state[key]}>
-                      {val.text}
-                    </option>
-                  ))}
+                  {config[key].map((val, idy) => {
+                    value = stationClockDefaults[val.value]
+                    return (
+                      <option value={value} key={`option-${idy}`} selected={value === this.state[key]}>
+                        {val.text}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
             ))}
