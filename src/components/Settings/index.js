@@ -18,13 +18,16 @@ class Settings extends React.Component {
       secondHand: stationClockDefaults['NoSecondHand'],
       boss: stationClockDefaults['NoBoss'],
       minuteHandBehavoir: stationClockDefaults['BouncingMinuteHand'],
-      secondHandBehavoir: stationClockDefaults['BouncingSecondHand']
+      secondHandBehavoir: stationClockDefaults['BouncingSecondHand'],
+      width: 200,
+      height: 200
     }
 
     timezone.settings = timezone.settings || defaultValues
 
     this.state = timezone.settings
     this.handleChange = this.handleChange.bind(this)
+    this.renderSelect = this.renderSelect.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
@@ -40,30 +43,30 @@ class Settings extends React.Component {
     updateSettings(Object.assign({}, timezone, { settings: this.state }))
   }
 
+  renderOption (val, idx) {
+    return <option value={stationClockDefaults[val.value]} key={`option-${idx}`}>{val.text}</option>
+  }
+
+  renderSelect (key, idx) {
+    return (
+      <div key={`div-${idx}`}>
+        <p>{key}</p>
+        <select name={key} id={key} onChange={this.handleChange} defaultValue={this.state[key]}>
+          {config[key].map(this.renderOption)}
+        </select>
+      </div>
+    )
+  }
+
   render () {
     const { timezone } = this.props
-    let value
 
     return timezone && (
       <div className='settings'>
         <div className='settings__preview'>{`Editing: ${timezone.title}`}</div>
         <div className='settings__form'>
           <form onSubmit={this.onSave}>
-            {Object.keys(config).map((key, idx) => (
-              <div key={`div-${idx}`}>
-                <p>{key}</p>
-                <select name={key} id={key} onChange={this.handleChange}>
-                  {config[key].map((val, idy) => {
-                    value = stationClockDefaults[val.value]
-                    return (
-                      <option value={value} key={`option-${idy}`} selected={value === this.state[key]}>
-                        {val.text}
-                      </option>
-                    )
-                  })}
-                </select>
-              </div>
-            ))}
+            {Object.keys(config).map(this.renderSelect)}
             <input className='settings__submit' type='submit' value='Save and Close' />
           </form>
         </div>

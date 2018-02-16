@@ -18,6 +18,8 @@ class Clock extends React.Component {
     }
 
     this.initializeClock = this.initializeClock.bind(this)
+    this.isNewClock = this.isNewClock.bind(this)
+    this.handleSize = this.handleSize.bind(this)
   }
 
   componentWillUnmount () {
@@ -25,12 +27,30 @@ class Clock extends React.Component {
     window.clearInterval(this.interval)
   }
 
-  componentDidMount () {
-    this.initializeClock()
+  shouldComponentUpdate (newProps) {
+    return this.isNewClock(newProps)
   }
 
-  initializeClock () {
-    const { zone = {}, idx } = this.props
+  componentWillReceiveProps (newProps) {
+    if (this.isNewClock(newProps)) {
+      this.initializeClock(newProps)
+    }
+  }
+
+  componentDidMount () {
+    this.initializeClock(this.props)
+  }
+
+  isNewClock (newProps) {
+    return JSON.stringify(newProps.zone) !== JSON.stringify(this.props.zone)
+  }
+
+  initializeClock (props) {
+    // clear previous clock
+    this.clock = undefined
+    window.clearInterval(this.interval)
+
+    const { zone = {}, idx } = props
     const clockSettings = zone.settings || this.initialOptions
 
     this.clock = new StationClock(idx)
@@ -41,7 +61,7 @@ class Clock extends React.Component {
     var that = this
     this.interval = window.setInterval(function () {
       that.clock.draw()
-    }, 5000)
+    }, 50)
   }
 
   render () {
@@ -51,7 +71,7 @@ class Clock extends React.Component {
       <div className='clocks__clock'>
         {this.props.zone && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
-          <canvas id={idx} width='200' height='200' />
+          <canvas id={idx} width={200} height={200} />
           {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}
         </div>
       </div>
