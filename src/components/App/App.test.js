@@ -33,7 +33,7 @@ describe('<App />', function () {
   })
 
   it('updates state with timezones', () => {
-    expect(wrapper.state()).toEqual({
+    expect(wrapper.state()).toMatchObject({
       'timezones': [berlinTimezone]
     })
   })
