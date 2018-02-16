@@ -35,9 +35,7 @@ class Clock extends React.Component {
 
     this.clock = new StationClock(idx)
     this.clock.timezone = zone.timezone
-    // Object.assign(this.clock, zone.settings)
-    console.log(StationClock[clockSettings.body])
-    Object.assign(this.clock, clockSettings) // THIS NEED PARSING!!
+    Object.assign(this.clock, clockSettings)
 
     this.clock.draw()
     var that = this
@@ -67,7 +65,7 @@ Clock.propTypes = {
     timezone: PropTypes.string,
     settings: PropTypes.any
   }),
-  onEdit: PropTypes.func.isRequired,
+  onEdit: PropTypes.func,
   idx: PropTypes.string
 }
 
