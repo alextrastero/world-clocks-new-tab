@@ -7,8 +7,6 @@ jest.mock('localStorage')
 describe('<App />', function () {
   let App
   let wrapper
-  let getItemMock
-  let setItemMock
   const berlinTimezone = { title: 'Berlin', timezone: 'Europe/Berlin' }
 
   beforeEach(() => {

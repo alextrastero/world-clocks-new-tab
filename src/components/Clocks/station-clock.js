@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*!
  * station-clock.js
  *

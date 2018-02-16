@@ -9,7 +9,7 @@ class Settings extends React.Component {
   constructor (props) {
     super(props)
 
-    const { timezone } = props
+    const { timezone = {} } = props
     const defaultValues = {
       body: stationClockDefaults['RoundBody'],
       dial: stationClockDefaults['GermanStrokeDial'],
@@ -74,7 +74,10 @@ class Settings extends React.Component {
 
 Settings.propTypes = {
   updateSettings: PropTypes.func.isRequired,
-  timezone: PropTypes.any
+  timezone: PropTypes.shape({
+    title: PropTypes.string,
+    timezone: PropTypes.string
+  }).isRequired
 }
 
 export default Settings
