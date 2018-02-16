@@ -28,7 +28,7 @@ export const config = {
     { value: 'BarSecondHand', text: 'Javelin-shaped hand (DIN 41071, Sect. 1)' },
     { value: 'HoleShapedSecondHand', text: 'Perforated pointer hand (DIN 41071, Sect. 2)' },
     { value: 'NewHoleShapedSecondHand', text: 'Perforated pointer hand (German Rail)' },
-    { value: 'SwissSecondHand', text: 'disabled="disabled">Disc-end hand (Switzerland)' }
+    { value: 'SwissSecondHand', text: 'Disc-end hand (Switzerland)' }
   ],
   boss: [
     { value: 'NoBoss', text: 'Without axis cover' },
