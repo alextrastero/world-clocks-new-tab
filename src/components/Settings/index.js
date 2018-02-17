@@ -23,22 +23,30 @@ class Settings extends React.Component {
 
     zone.settings = zone.settings || defaultValues
 
-    this.state = zone.settings
+    this.state = {
+      settings: zone.settings,
+      title: zone.title
+    }
     this.handleChange = this.handleChange.bind(this)
     this.renderSelect = this.renderSelect.bind(this)
+    this.updateTitle = this.updateTitle.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
   handleChange (evt) {
     const { name, value } = evt.target
-    this.setState({ [name]: parseInt(value) })
+
+    this.setState({
+      settings: Object.assign({}, this.state.settings, { [name]: parseInt(value) })
+    })
   }
 
   onSave (evt) {
     evt.preventDefault()
     const { updateSettings, zone } = this.props
+    const { title, settings } = this.state
 
-    updateSettings(Object.assign({}, zone, { settings: this.state }))
+    updateSettings(Object.assign({}, zone, { settings, title }))
   }
 
   renderOption (val, idx) {
@@ -47,34 +55,39 @@ class Settings extends React.Component {
 
   renderSelect (key, idx) {
     return (
-      <div key={`div-${idx}`}>
-        <p>{key}</p>
-        <select name={key} id={key} onChange={this.handleChange} defaultValue={this.state[key]}>
+      <div className='row' key={`div-${idx}`}>
+        <label className='four columns' forhtml={key}>{key}</label>
+        <select className='eight columns' name={key} id={key} onChange={this.handleChange} defaultValue={this.state.settings[key]}>
           {config[key].map(this.renderOption)}
         </select>
       </div>
     )
   }
 
+  updateTitle (evt) {
+    this.setState({ title: evt.target.value })
+  }
+
   render () {
     const { zone } = this.props
 
     return zone && (
-      <div className='settings'>
-        <div className='settings__form'>
+      <div className='settings row'>
+        <div className='settings__form six columns'>
           <form onSubmit={this.onSave}>
             {Object.keys(config).map(this.renderSelect)}
-            <input className='settings__submit' type='submit' value='Save and Close' />
+            <div className='row'>
+              <input className='six columns' type='button' value='Random' />
+              <input className='button-primary six columns' type='submit' value='Save' />
+            </div>
           </form>
         </div>
-        <div className='settings__preview'>
-          <p>{`Editing: ${zone.title}`}</p>
+        <div className='settings__preview six columns'>
           <div className='settings__clock'>
-            <Clock
-              preview
-              idx='preview'
-              zone={{ timezone: zone.timezone, settings: this.state }} />
+            <Clock preview idx='preview' zone={{ timezone: zone.timezone, settings: this.state.settings }} />
           </div>
+          <label forhtml='title'>Title</label>
+          <input type='text' name='title' onChange={this.updateTitle} defaultValue={zone.title} />
         </div>
       </div>
     )

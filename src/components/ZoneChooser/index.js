@@ -94,7 +94,7 @@ class ZoneChooser extends React.Component {
           <ul>
             {timezones.map(this.renderZoneListElem)}
           </ul>
-          <button className='zone-chooser__save' onClick={this.toggleVisible}>Save</button>
+          <button className='zone-chooser__save button-primary' onClick={this.toggleVisible}>Save</button>
         </div>
       </div>
     )

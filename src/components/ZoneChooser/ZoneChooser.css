@@ -4,22 +4,19 @@
   right: .6rem;
   top: .6rem;
   font-family: arial;
-  font-size: smaller;
   z-index: 2;
 }
 
 .zone-chooser__opener a {
   background: transparent url('../../../assets/settings-work-tool.svg') no-repeat center;
-  box-sizing: border-box;
   font-size: 0;
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 2rem;
+  width: 2rem;
   display: block;
 }
 
 .zone-chooser__chooser {
-  padding: 1.2rem;
-  background-color: #ddd;
+  padding: 1rem;
   border-radius: .2rem;
 }
 
@@ -33,7 +30,7 @@
 }
 
 .zone-chooser p {
-  margin-top: 0;
+  margin: 0;
 }
 
 .zone-chooser ul {
@@ -51,17 +48,17 @@
 }
 
 .zone-chooser__save {
-  width: 100%;
-  margin: 0 !important;
+  /* width: 100%; */
+  /* margin: 0 !important; */
 }
 
 .zone-chooser__form input {
-  display: block;
-  width: 100%;
+  /* display: block; */
+  /* width: 100%; */
 }
 
 .zone-chooser__form input[type=submit] {
-  margin-top: .6rem;
+  /* margin-top: .6rem; */
 }
 
 .zone-chooser.is-active .zone-chooser__chooser,
