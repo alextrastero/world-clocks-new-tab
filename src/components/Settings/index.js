@@ -30,6 +30,7 @@ class Settings extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.renderSelect = this.renderSelect.bind(this)
     this.updateTitle = this.updateTitle.bind(this)
+    this.randomSettings = this.randomSettings.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
@@ -68,6 +69,17 @@ class Settings extends React.Component {
     this.setState({ title: evt.target.value })
   }
 
+  randomSettings () {
+    const settings = {}
+    let idx
+    Object.keys(config).forEach((val) => {
+      idx = Math.floor(Math.random(1) * config[val].length)
+      settings[val] = stationClockDefaults[config[val][idx].value]
+    })
+
+    this.setState({ settings })
+  }
+
   render () {
     const { zone } = this.props
 
@@ -77,7 +89,7 @@ class Settings extends React.Component {
           <form onSubmit={this.onSave}>
             {Object.keys(config).map(this.renderSelect)}
             <div className='row'>
-              <input className='six columns' type='button' value='Random' />
+              <input className='six columns' onClick={this.randomSettings} type='button' value='Random' />
               <input className='button-primary six columns' type='submit' value='Save' />
             </div>
           </form>
