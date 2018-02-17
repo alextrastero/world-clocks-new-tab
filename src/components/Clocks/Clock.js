@@ -68,7 +68,7 @@ class Clock extends React.Component {
 
     return (
       <div className='clocks__clock'>
-        {zone && !preview && <a onClick={onEdit} className='clocks__clock-settings' />}
+        {zone.title && !preview && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
           <canvas id={idx} width={200} height={200} />
           {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}

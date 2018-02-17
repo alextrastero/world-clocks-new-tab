@@ -1,11 +1,10 @@
 .zone-chooser {
   max-width: 30rem;
   position: absolute;
-  right: .6rem;
-  top: .6rem;
+  right: 0;
+  top: 2rem;
   font-family: arial;
   z-index: 2;
-  background-color: #F6F6F6;
 }
 
 .zone-chooser__opener a {
@@ -18,11 +17,18 @@
 
 .zone-chooser__chooser {
   padding: 1rem;
+  background-color: #F6F6F6;
+  border: 1px solid #ddd;
   border-radius: .2rem;
 }
 
 .zone-chooser__form label:not(:first-child) {
   margin-top: .4rem;
+}
+
+.zone-chooser li {
+  overflow: auto;
+  width: 100%;
 }
 
 .zone-chooser ul {
@@ -33,6 +39,10 @@
 
 .zone-chooser span {
   line-height: 3.6rem;
+}
+
+.zone-chooser__form form {
+  margin: 0;
 }
 
 .zone-chooser__form label {
@@ -51,8 +61,4 @@
 .zone-chooser .zone-chooser__chooser,
 .zone-chooser.is-active .zone-chooser__opener {
   display: none;
-}
-
-.zone-chooser.is-active {
-  /* display: block; */
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import isValid from './form-validator'
+import tz from './tz-list'
 
 import './ZoneChooser.css'
 
@@ -28,12 +29,11 @@ class ZoneChooser extends React.Component {
 
   clearInputs () {
     this._title.value = ''
-    this._timezone.value = ''
   }
 
   renderZoneListElem (zone, idx) {
     return (
-      <li key={idx}>{zone.title}: <span>{zone.timezone}</span>
+      <li key={idx}><span>{zone.title}</span>
         <button className='u-pull-right' onClick={() => this.removeTimezone(idx)}>x</button>
       </li>
     )
@@ -64,6 +64,12 @@ class ZoneChooser extends React.Component {
     this.setState({ error: {} })
   }
 
+  renderTZOption (opt, idx) {
+    return (
+      <option key={`tz-${idx}`} value={opt.value}>{opt.name}</option>
+    )
+  }
+
   renderForm () {
     return (
       <div className='zone-chooser__form'>
@@ -74,7 +80,7 @@ class ZoneChooser extends React.Component {
           </div>
           <div className='row'>
             <label className='columns four' htmlFor='timezone'>Timezone: </label>
-            <input className='columns eight' type='text' ref={el => (this._timezone = el)} name='timezone' />
+            <select name='timezone' className='columns eight'>{tz.map(this.renderTZOption)}</select>
           </div>
           <input type='submit' className='u-full-width' value='Add' />
         </form>
@@ -97,9 +103,7 @@ class ZoneChooser extends React.Component {
             {this.renderForm()}
             <small>{error.message}</small>
           </div>
-          <ul>
-            {timezones.map(this.renderZoneListElem)}
-          </ul>
+          <ul>{timezones.map(this.renderZoneListElem)}</ul>
           <button className='zone-chooser__save button-primary' onClick={this.toggleVisible}>Save</button>
         </div>
       </div>
