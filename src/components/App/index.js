@@ -60,7 +60,7 @@ class App extends React.Component {
 
     return (
       <div className='app'>
-        {editingId !== null && <Settings timezone={timezones[editingId]} updateSettings={this.updateSettings} />}
+        {editingId !== null && <Settings zone={timezones[editingId]} updateSettings={this.updateSettings} />}
         <ZoneChooser timezones={timezones} updateTimezones={this.updateTimezones} />
         <Clocks onEdit={this.handleEdit} timezones={timezones} />
       </div>

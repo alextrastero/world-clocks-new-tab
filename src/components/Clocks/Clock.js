@@ -64,11 +64,11 @@ class Clock extends React.Component {
   }
 
   render () {
-    const { onEdit, zone = {}, idx } = this.props
+    const { onEdit, zone = {}, idx, preview } = this.props
 
     return (
       <div className='clocks__clock'>
-        {this.props.zone && <a onClick={onEdit} className='clocks__clock-settings' />}
+        {zone && !preview && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
           <canvas id={idx} width={200} height={200} />
           {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}
@@ -85,7 +85,8 @@ Clock.propTypes = {
     settings: PropTypes.any
   }),
   onEdit: PropTypes.func,
-  idx: PropTypes.string
+  idx: PropTypes.string,
+  preview: PropTypes.bool
 }
 
 export default Clock

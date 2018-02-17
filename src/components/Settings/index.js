@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-// import Clock from '../Clocks/Clock'
+import Clock from '../Clocks/Clock'
 import './Settings.css'
 import stationClockDefaults from './stationClockDefaults'
 import { config } from './config'
@@ -9,7 +9,7 @@ class Settings extends React.Component {
   constructor (props) {
     super(props)
 
-    const { timezone = {} } = props
+    const { zone = {} } = props
     const defaultValues = {
       body: stationClockDefaults['RoundBody'],
       dial: stationClockDefaults['GermanStrokeDial'],
@@ -18,14 +18,12 @@ class Settings extends React.Component {
       secondHand: stationClockDefaults['NoSecondHand'],
       boss: stationClockDefaults['NoBoss'],
       minuteHandBehavoir: stationClockDefaults['BouncingMinuteHand'],
-      secondHandBehavoir: stationClockDefaults['BouncingSecondHand'],
-      width: 200,
-      height: 200
+      secondHandBehavoir: stationClockDefaults['BouncingSecondHand']
     }
 
-    timezone.settings = timezone.settings || defaultValues
+    zone.settings = zone.settings || defaultValues
 
-    this.state = timezone.settings
+    this.state = zone.settings
     this.handleChange = this.handleChange.bind(this)
     this.renderSelect = this.renderSelect.bind(this)
     this.onSave = this.onSave.bind(this)
@@ -38,9 +36,9 @@ class Settings extends React.Component {
 
   onSave (evt) {
     evt.preventDefault()
-    const { updateSettings, timezone } = this.props
+    const { updateSettings, zone } = this.props
 
-    updateSettings(Object.assign({}, timezone, { settings: this.state }))
+    updateSettings(Object.assign({}, zone, { settings: this.state }))
   }
 
   renderOption (val, idx) {
@@ -59,16 +57,24 @@ class Settings extends React.Component {
   }
 
   render () {
-    const { timezone } = this.props
+    const { zone } = this.props
 
-    return timezone && (
+    return zone && (
       <div className='settings'>
-        <div className='settings__preview'>{`Editing: ${timezone.title}`}</div>
         <div className='settings__form'>
           <form onSubmit={this.onSave}>
             {Object.keys(config).map(this.renderSelect)}
             <input className='settings__submit' type='submit' value='Save and Close' />
           </form>
+        </div>
+        <div className='settings__preview'>
+          <p>{`Editing: ${zone.title}`}</p>
+          <div className='settings__clock'>
+            <Clock
+              preview
+              idx='preview'
+              zone={{ timezone: zone.timezone, settings: this.state }} />
+          </div>
         </div>
       </div>
     )
@@ -77,7 +83,7 @@ class Settings extends React.Component {
 
 Settings.propTypes = {
   updateSettings: PropTypes.func.isRequired,
-  timezone: PropTypes.shape({
+  zone: PropTypes.shape({
     title: PropTypes.string,
     timezone: PropTypes.string
   }).isRequired

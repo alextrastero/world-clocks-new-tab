@@ -1,26 +1,39 @@
 .settings {
-	position: fixed;
-	background: #eee;
-	border-radius: 4px;
-	font-family: sans-serif;
-	padding: 10px;
-	z-index: 1;
-	text-align: left;
-	left: 2rem;
-	top: 2rem;
-	bottom: 2rem;
-	right: 2rem;
+  position: fixed;
+  background: #eee;
+  border-radius: 4px;
+  font-family: sans-serif;
+  padding: 10px;
+  z-index: 1;
+  text-align: left;
+  left: 2rem;
+  top: 2rem;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+}
+
+.settings > * {
+  outline:1px solid red;
+}
+
+.settings__form {
+  width: 50%;
+}
+
+.settings__preview {
+  width: 50%;
 }
 
 .settings__submit {
-	position: absolute;
-	bottom: 1rem;
+  position: absolute;
+  bottom: 1rem;
 }
 
 .settings label {
-	display: block;
+  display: block;
 }
 
 .settings p {
-	margin: .6rem 0 .6rem 0;
+  margin: .6rem 0 .6rem 0;
 }
