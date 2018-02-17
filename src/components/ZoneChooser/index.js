@@ -33,8 +33,8 @@ class ZoneChooser extends React.Component {
 
   renderZoneListElem (zone, idx) {
     return (
-      <li key={idx}>{zone.title}: {zone.timezone}
-        <button onClick={() => this.removeTimezone(idx)}>x</button>
+      <li key={idx}>{zone.title}: <span>{zone.timezone}</span>
+        <button className='u-pull-right' onClick={() => this.removeTimezone(idx)}>x</button>
       </li>
     )
   }
@@ -68,9 +68,15 @@ class ZoneChooser extends React.Component {
     return (
       <div className='zone-chooser__form'>
         <form onSubmit={this.addTimezone}>
-          <label htmlFor='title'>Title: <input ref={el => (this._title = el)} name='title' /></label>
-          <label htmlFor='timezone'>Timezone: <input ref={el => (this._timezone = el)} name='timezone' /> </label>
-          <input type='submit' value='Add' />
+          <div className='row'>
+            <label className='columns four' htmlFor='title'>Title: </label>
+            <input className='columns eight' type='text' ref={el => (this._title = el)} name='title' />
+          </div>
+          <div className='row'>
+            <label className='columns four' htmlFor='timezone'>Timezone: </label>
+            <input className='columns eight' type='text' ref={el => (this._timezone = el)} name='timezone' />
+          </div>
+          <input type='submit' className='u-full-width' value='Add' />
         </form>
       </div>
     )
