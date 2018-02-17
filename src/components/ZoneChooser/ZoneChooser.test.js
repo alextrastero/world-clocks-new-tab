@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 describe('<ZoneChooser />', function () {
   let ZoneChooser
@@ -20,7 +20,7 @@ describe('<ZoneChooser />', function () {
 
   beforeEach(() => {
     ZoneChooser = require('./index').default
-    wrapper = shallow(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
+    wrapper = mount(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
   })
 
   it('should render without throwing an error', () => {
