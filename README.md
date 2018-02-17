@@ -6,4 +6,4 @@
 - [NervJS](https://github.com/NervJS/nerv) for templating
 
 ### kudos
-- 3Quarks » SVG Railway Station Clock, Rüdiger Appel
+- [3Quarks](http://www.3quarks.com/en/StationClock/index.html) » SVG Railway Station Clock, Rüdiger Appel

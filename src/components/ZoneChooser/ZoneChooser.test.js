@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount, render } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 describe('<ZoneChooser />', function () {
   let ZoneChooser
@@ -11,6 +11,7 @@ describe('<ZoneChooser />', function () {
   const timezones = [berlinTimezone, keralaTimezone]
 
   const formEvent = (title, timezone) => ({
+    preventDefault: () => {},
     target: {
       title: { value: title },
       timezone: { value: timezone }
@@ -32,13 +33,13 @@ describe('<ZoneChooser />', function () {
 
   it('adds an `is-active` class when toggled', () => {
     const trigger = wrapper.find('.zone-chooser__opener a')
-    trigger.simulate('click')
+    trigger.simulate('click', { preventDefault: () => {} })
     expect(wrapper.find('.zone-chooser').hasClass('is-active')).toBe(true)
   })
 
   describe('zone list', () => {
     ZoneChooser = require('./index').default
-    wrapper = mount(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
+    wrapper = shallow(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
 
     it('renders one zone per timezone', () => {
       expect(wrapper.find('button').length).toBe(timezones.length + 1)
@@ -48,7 +49,7 @@ describe('<ZoneChooser />', function () {
   describe('form', () => {
     beforeEach(() => {
       ZoneChooser = require('./index').default
-      wrapper = mount(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
+      wrapper = shallow(<ZoneChooser timezones={timezones} updateTimezones={updateMock} />)
       form = wrapper.find('form')
     })
 
@@ -57,10 +58,9 @@ describe('<ZoneChooser />', function () {
     })
 
     it('calls callback with new timezone plus existing ones', () => {
-      const timezones = wrapper.props().timezones
       form.simulate('submit', formEvent('LA', 'America/Los_Angeles'))
       expect(updateMock).toHaveBeenLastCalledWith(
-        timezones.concat({ title: 'LA', timezone: 'America/Los_Angeles'})
+        timezones.concat({ title: 'LA', timezone: 'America/Los_Angeles' })
       )
     })
 

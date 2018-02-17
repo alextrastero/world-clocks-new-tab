@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import isValid from './form-validator'
+import tz from './tz-list'
 
 import './ZoneChooser.css'
 
@@ -22,13 +23,18 @@ class ZoneChooser extends React.Component {
 
   toggleVisible (evt) {
     evt.preventDefault()
+    this.clearInputs()
     this.setState({ active: !this.state.active })
+  }
+
+  clearInputs () {
+    this._title.value = ''
   }
 
   renderZoneListElem (zone, idx) {
     return (
-      <li key={idx}>{zone.title}: {zone.timezone}
-        <button onClick={() => this.removeTimezone(idx)}>x</button>
+      <li key={idx}><span>{zone.title}</span>
+        <button className='u-pull-right' onClick={() => this.removeTimezone(idx)}>x</button>
       </li>
     )
   }
@@ -58,13 +64,25 @@ class ZoneChooser extends React.Component {
     this.setState({ error: {} })
   }
 
+  renderTZOption (opt, idx) {
+    return (
+      <option key={`tz-${idx}`} value={opt.value}>{opt.name}</option>
+    )
+  }
+
   renderForm () {
     return (
       <div className='zone-chooser__form'>
         <form onSubmit={this.addTimezone}>
-          <label htmlFor='title'>Title: <input name='title' /></label>
-          <label htmlFor='timezone'>Timezone: <input name='timezone' /> </label>
-          <input type='submit' value='Add' />
+          <div className='row'>
+            <label className='columns four' htmlFor='title'>Title: </label>
+            <input className='columns eight' type='text' ref={el => (this._title = el)} name='title' />
+          </div>
+          <div className='row'>
+            <label className='columns four' htmlFor='timezone'>Timezone: </label>
+            <select name='timezone' className='columns eight'>{tz.map(this.renderTZOption)}</select>
+          </div>
+          <input type='submit' className='u-full-width' value='Add' />
         </form>
       </div>
     )
@@ -85,10 +103,8 @@ class ZoneChooser extends React.Component {
             {this.renderForm()}
             <small>{error.message}</small>
           </div>
-          <ul>
-            {timezones.map(this.renderZoneListElem)}
-          </ul>
-          <button className='zone-chooser__save' onClick={this.toggleVisible}>Save</button>
+          <ul>{timezones.map(this.renderZoneListElem)}</ul>
+          <button className='zone-chooser__save button-primary' onClick={this.toggleVisible}>Save</button>
         </div>
       </div>
     )

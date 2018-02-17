@@ -1,38 +1,34 @@
 .zone-chooser {
-  max-width: 20rem;
+  max-width: 30rem;
   position: absolute;
-  right: .6rem;
-  top: .6rem;
+  right: 0;
+  top: 2rem;
   font-family: arial;
-  font-size: smaller;
+  z-index: 2;
 }
 
 .zone-chooser__opener a {
   background: transparent url('../../../assets/settings-work-tool.svg') no-repeat center;
-  box-sizing: border-box;
   font-size: 0;
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 2rem;
+  width: 2rem;
   display: block;
 }
 
 .zone-chooser__chooser {
-  padding: 1.2rem;
-  background-color: #ddd;
+  padding: 1rem;
+  background-color: #F6F6F6;
+  border: 1px solid #ddd;
   border-radius: .2rem;
-}
-
-.zone-chooser__form > * {
-  margin: 0;
-  padding: 0;
 }
 
 .zone-chooser__form label:not(:first-child) {
   margin-top: .4rem;
 }
 
-.zone-chooser p {
-  margin-top: 0;
+.zone-chooser li {
+  overflow: auto;
+  width: 100%;
 }
 
 .zone-chooser ul {
@@ -41,28 +37,22 @@
   list-style: none;
 }
 
+.zone-chooser span {
+  line-height: 3.6rem;
+}
+
+.zone-chooser__form form {
+  margin: 0;
+}
+
 .zone-chooser__form label {
   display: block;
+  line-height: 3.6rem;
 }
 
 .zone-chooser button {
   margin-left: .4rem;
 }
-
-.zone-chooser__save {
-  width: 100%;
-  margin: 0 !important;
-}
-
-.zone-chooser__form input {
-  display: block;
-  width: 100%;
-}
-
-.zone-chooser__form input[type=submit] {
-  margin-top: .6rem;
-}
-
 .zone-chooser.is-active .zone-chooser__chooser,
 .zone-chooser .zone-chooser__opener {
   display: block;
@@ -71,8 +61,4 @@
 .zone-chooser .zone-chooser__chooser,
 .zone-chooser.is-active .zone-chooser__opener {
   display: none;
-}
-
-.zone-chooser.is-active {
-  /* display: block; */
 }

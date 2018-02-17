@@ -1,0 +1,30 @@
+.settings {
+  background-color: #F6F6F6;
+  padding: 4rem 2rem;
+  z-index: 1;
+  text-align: left;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  position: absolute;
+  z-index: 3;
+  font-size: 85%;
+}
+
+.settings__form form {
+  margin: 0;
+}
+
+.settings__form input {
+  margin-top: 2rem;
+}
+
+.settings__form label {
+  line-height: 3.6rem;
+}
+
+.settings__preview {
+  text-align: center;
+}

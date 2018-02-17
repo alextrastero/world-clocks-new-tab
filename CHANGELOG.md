@@ -1,5 +1,11 @@
 # world-clocks-new-tab
 
+## 2.0.0
+
+ - New feature: Settings (customize each clock)
+ - New feature: TZ List dropdown
+ - Adds style to UI
+
 ## 1.1.3
 
  - Move back to nervjs

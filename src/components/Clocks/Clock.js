@@ -6,7 +6,19 @@ class Clock extends React.Component {
   constructor (props) {
     super(props)
 
+    this.initialOptions = {
+      body: StationClock.RoundBody,
+      dial: StationClock.GermanStrokeDial,
+      hourHand: StationClock.PointedHourHand,
+      minuteHand: StationClock.PointedMinuteHand,
+      secondHand: StationClock.NoSecondHand,
+      boss: StationClock.NoBoss,
+      minuteHandBehavoir: StationClock.BouncingMinuteHand,
+      secondHandBehavoir: StationClock.BouncingSecondHand
+    }
+
     this.initializeClock = this.initializeClock.bind(this)
+    this.isNewClock = this.isNewClock.bind(this)
   }
 
   componentWillUnmount () {
@@ -14,38 +26,51 @@ class Clock extends React.Component {
     window.clearInterval(this.interval)
   }
 
-  componentDidMount () {
-    this.initializeClock()
+  shouldComponentUpdate (newProps) {
+    return this.isNewClock(newProps)
   }
 
-  initializeClock () {
-    const { zone = {}, idx } = this.props
+  componentWillReceiveProps (newProps) {
+    if (this.isNewClock(newProps)) {
+      this.initializeClock(newProps)
+    }
+  }
+
+  componentDidMount () {
+    this.initializeClock(this.props)
+  }
+
+  isNewClock (newProps) {
+    return JSON.stringify(newProps.zone) !== JSON.stringify(this.props.zone)
+  }
+
+  initializeClock (props) {
+    // clear previous clock
+    this.clock = undefined
+    window.clearInterval(this.interval)
+
+    const { zone = {}, idx } = props
+    const clockSettings = zone.settings || this.initialOptions
 
     this.clock = new StationClock(idx)
     this.clock.timezone = zone.timezone
-    this.clock.body = StationClock.RoundBody
-    this.clock.dial = StationClock.GermanStrokeDial
-    this.clock.hourHand = StationClock.PointedHourHand
-    this.clock.minuteHand = StationClock.PointedMinuteHand
-    this.clock.secondHand = StationClock.NoSecondHand
-    this.clock.boss = StationClock.NoBoss
-    this.clock.minuteHandBehavoir = StationClock.BouncingMinuteHand
-    this.clock.secondHandBehavoir = StationClock.BouncingSecondHand
+    Object.assign(this.clock, clockSettings)
 
     this.clock.draw()
     var that = this
     this.interval = window.setInterval(function () {
       that.clock.draw()
-    }, 20000)
+    }, 50)
   }
 
   render () {
-    const { zone = {}, idx } = this.props
+    const { onEdit, zone = {}, idx, preview } = this.props
 
     return (
       <div className='clocks__clock'>
+        {zone.title && !preview && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
-          <canvas id={idx} width='200' height='200' />
+          <canvas id={idx} width={200} height={200} />
           {zone.title && <p className='clocks__clock-timezone'>{zone.title}</p>}
         </div>
       </div>
@@ -56,9 +81,12 @@ class Clock extends React.Component {
 Clock.propTypes = {
   zone: PropTypes.shape({
     title: PropTypes.string,
-    timezone: PropTypes.string
+    timezone: PropTypes.string,
+    settings: PropTypes.any
   }),
-  idx: PropTypes.string
+  onEdit: PropTypes.func,
+  idx: PropTypes.string,
+  preview: PropTypes.bool
 }
 
 export default Clock
