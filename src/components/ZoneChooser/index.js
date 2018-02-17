@@ -22,7 +22,13 @@ class ZoneChooser extends React.Component {
 
   toggleVisible (evt) {
     evt.preventDefault()
+    this.clearInputs()
     this.setState({ active: !this.state.active })
+  }
+
+  clearInputs () {
+    this._title.value = ''
+    this._timezone.value = ''
   }
 
   renderZoneListElem (zone, idx) {
@@ -62,8 +68,8 @@ class ZoneChooser extends React.Component {
     return (
       <div className='zone-chooser__form'>
         <form onSubmit={this.addTimezone}>
-          <label htmlFor='title'>Title: <input name='title' /></label>
-          <label htmlFor='timezone'>Timezone: <input name='timezone' /> </label>
+          <label htmlFor='title'>Title: <input ref={el => (this._title = el)} name='title' /></label>
+          <label htmlFor='timezone'>Timezone: <input ref={el => (this._timezone = el)} name='timezone' /> </label>
           <input type='submit' value='Add' />
         </form>
       </div>
