@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 2.0.1
+
+ - Add more SEO to manifest
+
 ## 2.0.0
 
  - New feature: Settings (customize each clock)
