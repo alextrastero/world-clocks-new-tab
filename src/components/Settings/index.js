@@ -52,18 +52,19 @@ class Settings extends React.Component {
   }
 
   renderOption ({ value, text }, idx) {
-    console.log(this.state.settings['body'], value)
     return <option value={value} key={`option-${idx}`}>{text}</option>
   }
 
   renderSelect (key, idx) {
-    // console.log(this.state.settings[key])
-    // defaultValue={this.state.settings[key]}
-    console.log('defaultValue', this.state.settings[key])
     return (
       <div className='row' key={`select-${idx}`}>
         <label className='four columns' forhtml={key}>{key}</label>
-        <select className='eight columns' name={key} onChange={this.handleChange} defaultValue={this.state.settings[key]}>
+        <select
+          className='eight columns'
+          name={key}
+          onChange={this.handleChange}
+          defaultValue={this.state.settings[key]}
+        >
           {config[key].map(this.renderOption)}
         </select>
       </div>
