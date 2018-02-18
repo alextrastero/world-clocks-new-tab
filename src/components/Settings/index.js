@@ -29,7 +29,6 @@ class Settings extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.renderSelect = this.renderSelect.bind(this)
-    this.renderOption = this.renderOption.bind(this)
     this.updateTitle = this.updateTitle.bind(this)
     this.randomSettings = this.randomSettings.bind(this)
     this.onSave = this.onSave.bind(this)
@@ -63,7 +62,7 @@ class Settings extends React.Component {
           className='eight columns'
           name={key}
           onChange={this.handleChange}
-          defaultValue={this.state.settings[key]}
+          value={this.state.settings[key]}
         >
           {config[key].map(this.renderOption)}
         </select>
