@@ -29,6 +29,7 @@ class Settings extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.renderSelect = this.renderSelect.bind(this)
+    this.renderOption = this.renderOption.bind(this)
     this.updateTitle = this.updateTitle.bind(this)
     this.randomSettings = this.randomSettings.bind(this)
     this.onSave = this.onSave.bind(this)
@@ -50,15 +51,19 @@ class Settings extends React.Component {
     updateSettings(Object.assign({}, zone, { settings, title }))
   }
 
-  renderOption (val, idx) {
-    return <option value={stationClockDefaults[val.value]} key={`option-${idx}`}>{val.text}</option>
+  renderOption ({ value, text }, idx) {
+    console.log(this.state.settings['body'], value)
+    return <option value={value} key={`option-${idx}`}>{text}</option>
   }
 
   renderSelect (key, idx) {
+    // console.log(this.state.settings[key])
+    // defaultValue={this.state.settings[key]}
+    console.log('defaultValue', this.state.settings[key])
     return (
-      <div className='row' key={`div-${idx}`}>
+      <div className='row' key={`select-${idx}`}>
         <label className='four columns' forhtml={key}>{key}</label>
-        <select className='eight columns' name={key} id={key} onChange={this.handleChange} defaultValue={this.state.settings[key]}>
+        <select className='eight columns' name={key} onChange={this.handleChange} defaultValue={this.state.settings[key]}>
           {config[key].map(this.renderOption)}
         </select>
       </div>
@@ -74,7 +79,7 @@ class Settings extends React.Component {
     let idx
     Object.keys(config).forEach((val) => {
       idx = Math.floor(Math.random(1) * config[val].length)
-      settings[val] = stationClockDefaults[config[val][idx].value]
+      settings[val] = config[val][idx].value
     })
 
     this.setState({ settings })
