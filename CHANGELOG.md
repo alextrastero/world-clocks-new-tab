@@ -1,5 +1,11 @@
 # world-clocks-new-tab
 
+## 2.0.2
+
+ - Remove unnecessary parsing
+ - Remove station clock defaults
+ - Add more Settings specs
+
 ## 2.0.1
 
  - Add more SEO to manifest
