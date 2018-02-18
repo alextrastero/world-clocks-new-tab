@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Clock from '../Clocks/Clock'
 import './Settings.css'
-import stationClockDefaults from './stationClockDefaults'
 import { config } from './config'
 
 class Settings extends React.Component {
@@ -11,14 +10,14 @@ class Settings extends React.Component {
 
     const { zone = {} } = props
     const defaultValues = {
-      body: stationClockDefaults['RoundBody'],
-      dial: stationClockDefaults['GermanStrokeDial'],
-      hourHand: stationClockDefaults['PointedHourHand'],
-      minuteHand: stationClockDefaults['PointedMinuteHand'],
-      secondHand: stationClockDefaults['NoSecondHand'],
-      boss: stationClockDefaults['NoBoss'],
-      minuteHandBehavoir: stationClockDefaults['BouncingMinuteHand'],
-      secondHandBehavoir: stationClockDefaults['BouncingSecondHand']
+      body: 2,
+      dial: 2,
+      hourHand: 1,
+      minuteHand: 1,
+      secondHand: 0,
+      boss: 0,
+      minuteHandBehavoir: 1,
+      secondHandBehavoir: 1
     }
 
     zone.settings = zone.settings || defaultValues
