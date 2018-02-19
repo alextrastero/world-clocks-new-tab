@@ -32,17 +32,33 @@ describe('<Settings />', function () {
     expect(wrapper.state().settings).toMatchObject({ body: 777 })
   })
 
-  it('updates settings on submit', () => {
-    const form = wrapper.find('form')
-    const select = wrapper.find('select').first()
-    select.simulate('change', {
-      target: { name: 'body', value: '999' }
+  describe('form', () => {
+    beforeEach(() => {
+      Settings = require('./index').default
+      wrapper = shallow(<Settings updateSettings={updateMock} zone={berlinTimezone} />)
     })
-    form.simulate('submit', { preventDefault: () => {} })
-    expect(updateMock.mock.calls[0][0]).toMatchObject({
-      'settings': {
-        'body': 999
-      }
+
+    it('updates settings on submit', () => {
+      const form = wrapper.find('form')
+      const select = wrapper.find('select').first()
+      select.simulate('change', {
+        target: { name: 'body', value: '999' }
+      })
+      form.simulate('submit', { preventDefault: () => {} })
+      expect(updateMock.mock.calls[0][0]).toMatchObject({
+        'settings': {
+          'body': 999
+        }
+      })
+    })
+
+    it('handles random settings', () => {
+      const form = wrapper.find('form')
+      const randomBtn = form.find('input').first()
+      const prevState = wrapper.state().settings
+
+      randomBtn.simulate('click')
+      expect(wrapper.state().settings).not.toMatchObject(prevState)
     })
   })
 })

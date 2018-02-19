@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Clock from '../Clocks/Clock'
 import './Settings.css'
-import stationClockDefaults from './stationClockDefaults'
 import { config } from './config'
 
 class Settings extends React.Component {
@@ -11,14 +10,14 @@ class Settings extends React.Component {
 
     const { zone = {} } = props
     const defaultValues = {
-      body: stationClockDefaults['RoundBody'],
-      dial: stationClockDefaults['GermanStrokeDial'],
-      hourHand: stationClockDefaults['PointedHourHand'],
-      minuteHand: stationClockDefaults['PointedMinuteHand'],
-      secondHand: stationClockDefaults['NoSecondHand'],
-      boss: stationClockDefaults['NoBoss'],
-      minuteHandBehavoir: stationClockDefaults['BouncingMinuteHand'],
-      secondHandBehavoir: stationClockDefaults['BouncingSecondHand']
+      body: 2,
+      dial: 2,
+      hourHand: 1,
+      minuteHand: 1,
+      secondHand: 0,
+      boss: 0,
+      minuteHandBehavoir: 1,
+      secondHandBehavoir: 1
     }
 
     zone.settings = zone.settings || defaultValues
@@ -50,15 +49,20 @@ class Settings extends React.Component {
     updateSettings(Object.assign({}, zone, { settings, title }))
   }
 
-  renderOption (val, idx) {
-    return <option value={stationClockDefaults[val.value]} key={`option-${idx}`}>{val.text}</option>
+  renderOption ({ value, text }, idx) {
+    return <option value={value} key={`option-${idx}`}>{text}</option>
   }
 
   renderSelect (key, idx) {
     return (
-      <div className='row' key={`div-${idx}`}>
+      <div className='row' key={`select-${idx}`}>
         <label className='four columns' forhtml={key}>{key}</label>
-        <select className='eight columns' name={key} id={key} onChange={this.handleChange} defaultValue={this.state.settings[key]}>
+        <select
+          className='eight columns'
+          name={key}
+          onChange={this.handleChange}
+          value={this.state.settings[key]}
+        >
           {config[key].map(this.renderOption)}
         </select>
       </div>
@@ -74,7 +78,7 @@ class Settings extends React.Component {
     let idx
     Object.keys(config).forEach((val) => {
       idx = Math.floor(Math.random(1) * config[val].length)
-      settings[val] = stationClockDefaults[config[val][idx].value]
+      settings[val] = config[val][idx].value
     })
 
     this.setState({ settings })
