@@ -1,5 +1,10 @@
 # world-clocks-new-tab
 
+## 2.0.3
+
+ - (BUG) Fixed timezones for 30min difference
+ - Changed SAVE to CLOSE in ZoneChooser
+
 ## 2.0.2
 
  - Remove unnecessary parsing
