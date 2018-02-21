@@ -254,8 +254,10 @@ StationClock.prototype.draw = function () {
           return now
         }
 
-        var hourInTimezone = now.toLocaleString('en-GB', { timeZone: timezone, hour: 'numeric' })
-        now.setHours(hourInTimezone)
+        var inTimezone = now.toLocaleString('en-GB', { timeZone: timezone })
+        console.log(now.setTime(inTimezone))
+        now.setTime(inTimezone)
+        // now.setHours(hourInTimezone)
 
         return now
       }
