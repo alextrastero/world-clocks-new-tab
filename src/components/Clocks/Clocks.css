@@ -9,11 +9,15 @@
 
 .clocks__clock {
   position: relative;
+  font-family: Copperplate;
 }
 
 .clocks__clock-timezone {
-  font-family: Copperplate;
   font-size: 2em;
+}
+
+.clocks__clock-diff {
+  font-size: .6em;
 }
 
 .clocks__clock-settings {
