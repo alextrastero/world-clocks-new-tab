@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import StationClock from './station-clock'
+import timeParser from './time-parser'
 
 class Clock extends React.Component {
   constructor (props) {
@@ -63,24 +64,6 @@ class Clock extends React.Component {
     }, 50)
   }
 
-  timeDiff (tz) {
-    const now = new Date()
-    const timeInZone = new Date(now.toLocaleString('en-US', { timeZone: tz }))
-    const diff = now.getTime() - timeInZone.getTime()
-
-    let minutes = ((diff/(1000*60))%60).toFixed(0)
-    let hours = parseInt((diff/(1000*60*60))%24)
-    if (hours == 0) return ''
-
-    minutes = (minutes != 0)
-      ? `:${minutes}`.replace(/-/, '')
-      : ''
-
-    if (hours > 0) hours = `+${hours}`
-
-    return <span className='clocks__clock-diff'>{`${hours}${minutes}h.`}</span>
-  }
-
   render () {
     const { onEdit, zone = {}, idx, preview } = this.props
 
@@ -89,7 +72,12 @@ class Clock extends React.Component {
         {zone.title && !preview && <a onClick={onEdit} className='clocks__clock-settings' />}
         <div className='clocks__clock-svg-wrapper'>
           <canvas id={idx} width={200} height={200} />
-          {zone.title && <p className='clocks__clock-timezone'>{zone.title} {this.timeDiff(zone.timezone)}</p>}
+          {zone.title && (
+            <div className='clocks__clock-timezone'>
+              <h5>{zone.title}</h5>
+              <h6>{timeParser(zone.timezone)}</h6>
+            </div>
+          )}
         </div>
       </div>
     )
