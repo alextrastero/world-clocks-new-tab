@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 2.1.0
+
+ - Add time difference from NOW to timezone
+
 ## 2.0.4
 
  - Set Copperplate font as clock title font
