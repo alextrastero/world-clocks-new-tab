@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 2.0.4
+
+ - Set Copperplate font as clock title font
+
 ## 2.0.3
 
  - (BUG) Fixed timezones for 30min difference
