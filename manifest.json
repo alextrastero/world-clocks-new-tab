@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "World Clocks New Tab",
   "short_name": "World Clocks",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "World Clocks New Tab - See multiple analog clocks with different timezones on a new tab",
   "author": "Alexander Odell <alextrastero@gmail.com>",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
