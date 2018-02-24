@@ -1,6 +1,6 @@
 import timeParser from './time-parser'
 
-describe.only('time-parser', function () {
+describe('time-parser', function () {
   let parsed
   const madridTZ = 'Europe/Madrid'
   const lisbonTZ = 'Europe/Lisbon'
