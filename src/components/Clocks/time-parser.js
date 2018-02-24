@@ -1,22 +1,29 @@
-const millisecondToHuman = (diff) => {
-  var msec = diff
-  var hh = Math.floor(msec / 1000 / 60 / 60)
-  msec -= hh * 1000 * 60 * 60
-  var mm = Math.floor(msec / 1000 / 60)
-  msec -= mm * 1000 * 60
+const msToMins = (ms) => Math.floor(Math.abs(ms / 1000 / 60))
 
-  return { hh, mm }
+const minsToHours = (mins) => {
+  return mins / 60
+}
+
+const millisecondToHuman = (diff) => {
+  var symbol = diff > 0 ? '+' : '-'
+  var minutes = msToMins(diff)
+  var hours = minsToHours(minutes)
+  if (hours === 0) return ''
+
+  var remaining = (hours % 1).toFixed(1) * 60
+  var ret = hours.toFixed(0)
+
+  if (remaining > 0 && remaining < 60) {
+    ret += `:${remaining}`
+  }
+
+  return `${symbol}${ret}h.`
 }
 
 export default (tz) => {
   const now = new Date()
   const timeInZone = new Date(now.toLocaleString('en-US', { timeZone: tz }))
-  const diff = now.getTime() - timeInZone.getTime()
-  const { hh, mm } = millisecondToHuman(diff)
+  const diff = timeInZone.getTime() - now.getTime()
 
-  const parsedHour = hh > 0 ? `+${hh}` : hh
-  const parsedMins = mm === 0 ? '' : `:${mm}`
-
-  return hh == 0 && mm == 0 ? '' : `${parsedHour}${parsedMins}h.`
+  return millisecondToHuman(diff)
 }
-
