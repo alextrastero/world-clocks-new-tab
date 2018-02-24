@@ -1,13 +1,9 @@
 const msToMins = (ms) => Math.floor(Math.abs(ms / 1000 / 60))
 
-const minsToHours = (mins) => {
-  return mins / 60
-}
-
-const millisecondToHuman = (diff) => {
+const humanReadableTime = (diff) => {
   var symbol = diff > 0 ? '+' : '-'
   var minutes = msToMins(diff)
-  var hours = minsToHours(minutes)
+  var hours = minutes / 60
   if (hours === 0) return ''
 
   var remaining = (hours % 1).toFixed(1) * 60
@@ -25,5 +21,5 @@ export default (tz) => {
   const timeInZone = new Date(now.toLocaleString('en-US', { timeZone: tz }))
   const diff = timeInZone.getTime() - now.getTime()
 
-  return millisecondToHuman(diff)
+  return humanReadableTime(diff)
 }
