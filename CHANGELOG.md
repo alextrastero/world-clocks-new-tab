@@ -1,5 +1,9 @@
 # world-clocks-new-tab
 
+## 2.1.1
+
+ - (BUG) Fix time diff bug
+
 ## 2.1.0
 
  - Add time difference from NOW to timezone
